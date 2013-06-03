@@ -154,18 +154,27 @@ margin: 19px auto 0 auto;
 }
 
 .column-left {
+border: 2px solid white;
 float: left;
-width: 165px;
+width: auto;
+height:220px;	
 text-align: center;
 color: #FFFFFF;
 }
 
 .column-left h3 {
-font: normal 1.5em Georgia, "Times New Roman", Times, serif;
+	
+font: normal 1.7em Georgia, "Times New Roman", Times, serif;
 margin: 10px 0 7px 0;
 letter-spacing: 1px;
 }
 
+.column-left a {
+	
+font: normal 1.2em;
+margin: 10px 0 7px 0;
+letter-spacing: 1px;
+}
 .column-right {
 margin: 0 0 0 191px;
 width: 650px;
