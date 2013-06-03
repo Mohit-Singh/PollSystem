@@ -67,7 +67,7 @@ var rowIndex=2;
 function addMoreOptions()
 {
 	rowIndex++;
-    var row = "<tr id='row_"+rowIndex+"'><td><label>Option</label></td><td><input type=text /></td><td><button onclick='removeRow("+rowIndex+");'>X</button></td></tr>";	
+    var row = "<tr id='row_"+rowIndex+"'><td><label>Option</label></td><td><input name='opt"+rowIndex+"' type=text /></td><td><button onclick='removeRow("+rowIndex+");'>X</button></td></tr>";	
     
 	$("#addMoreOptionsTable").append(row);
 
@@ -120,69 +120,59 @@ function AddQuestion() {
 <body>
 	<div id="wrapper">
 
-<div class="hidden">
-    <div id="loginDiv">
-    <h2>LOGIN</h2>
-    <label>USERNAME:</label>
-        <input type="text" id = "userName" name = "userName"/></br>
-        <label>PASSWORD:</label>
-        <input type="text" id = "password" name = "password"/></br>
-        <input type="button" id = "signIn" name="signIn" value="LOGIN"/>
-    </div>
-</div>
-      
-    <div class="hidden">
-    <div id="registerDiv">
-    <h2>REGISTER</h2>
-    <table>
-    <tr>
-    <td>
-        <label>FIRSTNAME:</label></td>
-        <td>
-        <input type="text" name="firstName" id="firstName"/></br>
-       </td>
-        </tr>
-        <tr>
-        <td>
-        <label>LASTNAME:</label>
-        </td>
-        <td>
-        <input type="text"name="lastName" id="lastName"/></br>
-        </td>
-        </tr>
-        <tr>
-        <td>
-        <label>PASSWORD:</label>
-        </td>
-        <td>
-        <input type="text" name="password" id="password"/></br>
-        </td>
-        </tr>
-        <tr>
-        <td>
-        <label>EMAIL:</label></td><td>
-        <input type="text" name="email" id="email"/></br></td>
-        </tr>
-        <tr>
-        <td>
-        <input type="button" name="register" value="REGISTER" onclick="register()"/></td></tr>
-        </table>
-    </div>
-</div>  
-      
-      
-    </div>
-    
-    <div id = "column-right"  class="column-right">
-      <div class="box">
-        </div>
-      </div>
-      
-    </div>
-    <div class="cleaner">&nbsp;</div>
-  </div>
-</div>
-<div align=center>OSSCUBE<a href='http://www.osscube.com'>  OSSCUBE.COM</a></div></body>
+		<div class="hidden">
+			<div id="loginDiv">
+				<h2>LOGIN</h2>
+				<label>USERNAME:</label> <input type="text" id="userName"
+					name="userName" /></br> <label>PASSWORD:</label> <input type="text"
+					id="password" name="password" /></br> <input type="button"
+					id="signIn" name="signIn" value="LOGIN" />
+			</div>
+		</div>
+
+		<div class="hidden">
+			<div id="registerDiv">
+				<h2>REGISTER</h2>
+				<table>
+					<tr>
+						<td><label>FIRSTNAME:</label></td>
+						<td><input type="text" name="firstName" id="firstName" /></br></td>
+					</tr>
+					<tr>
+						<td><label>LASTNAME:</label></td>
+						<td><input type="text" name="lastName" id="lastName" /></br></td>
+					</tr>
+					<tr>
+						<td><label>PASSWORD:</label></td>
+						<td><input type="text" name="password" id="password" /></br></td>
+					</tr>
+					<tr>
+						<td><label>EMAIL:</label></td>
+						<td><input type="text" name="email" id="email" /></br></td>
+					</tr>
+					<tr>
+						<td><input type="button" name="register" value="REGISTER"
+							onclick="register()" /></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div id="column-right" class="column-right">
+		<div class="box"></div>
+	</div>
+
+	</div>
+	<div class="cleaner">&nbsp;</div>
+	</div>
+	</div>
+	<div align=center>
+		OSSCUBE<a href='http://www.osscube.com'> OSSCUBE.COM</a>
+	</div>
+</body>
 </html>
 
 
