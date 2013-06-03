@@ -42,6 +42,18 @@ $(document).ready(function(){
         // 'transitionOut'        : 'none',
         // 'type'            : 'iframe'
      });
+    $("#signIn").click(function(){
+        $.ajax({
+                url : './index.php?controller=mainController&method=login',
+                type : 'post',
+                data : "userName="+$("#userName").val()+"&password="+$("#password").val(),                
+                success : function(data){
+                	$("#column-left").hide(); 
+                    $("#column-right").html(data);
+                }
+        });
+        $.fancybox.close();
+    });    
 });
 
 function openCreateNewPoll()
@@ -49,15 +61,20 @@ function openCreateNewPoll()
 $("#divCreateNewPoll").toggle();
 
 }
-var optionCount=2;
+var rowIndex=2;
 function addMoreOptions()
 {
-	optionCount++;
-	$("#addMoreOptions").append("<label>Option"+optionCount+"</label><br>");
-	$("#addMoreOptions").append("<input type='text' name='option"+optionCount+"'><br><br>");
+	rowIndex++;
+    var row = "<tr id='row_"+rowIndex+"'><td><label>Option</label></td><td><input type=text /></td><td><button onclick='removeRow("+rowIndex+");'>X</button></td></tr>";	
+    
+	$("#addMoreOptionsTable").append(row);
 
 	
 	
+}
+function removeRow(rowIndex){
+	
+    $('#row_'+rowIndex).remove();
 }
 </script>
 
@@ -67,26 +84,24 @@ function addMoreOptions()
   
   <hr class="noscreen" />
   <div class="content">
-    <div class="column-left">
-      <h3>MENU</h3>
-      
-    
-    
-    <p><a id="register" href="#registerDiv">REGISTER</a></p>
-    <p><a id="login" href="#loginDiv">LOGIN</a></p>
+    <div id = "column-left" class="column-left">
+      <h3>LOGIN/REGISTER</h3>
+          
+       <p><a id="register" href="#registerDiv">REGISTER</a></p>
+       <p><a id="login" href="#loginDiv">LOGIN</a></p>
 
 <div class="hidden">
     <div id="loginDiv">
     <h2>LOGIN</h2>
     <label>USERNAME:</label>
-        <input type="text"/></br>
+        <input type="text" id = "userName" name = "userName"/></br>
         <label>PASSWORD:</label>
-        <input type="text"/></br>
-        <input type="button" name="signIn" value="LOGIN"/>
+        <input type="text" id = "password" name = "password"/></br>
+        <input type="button" id = "signIn" name="signIn" value="LOGIN"/>
     </div>
 </div>
       
-    <div class="hidden">
+<div class="hidden">
     <div id="registerDiv">
     <h2>REGISTER</h2>
     <table>
@@ -94,7 +109,7 @@ function addMoreOptions()
     <td>
         <label>FIRSTNAME:</label></td>
         <td>
-        <input type="text" name="firstName"/></br>
+        <input type="text"/></br>
        </td>
         </tr>
         <tr>
@@ -102,7 +117,7 @@ function addMoreOptions()
         <label>LASTNAME:</label>
         </td>
         <td>
-        <input type="text"name="lastName"/></br>
+        <input type="text"/></br>
         </td>
         </tr>
         <tr>
@@ -110,17 +125,17 @@ function addMoreOptions()
         <label>PASSWORD:</label>
         </td>
         <td>
-        <input type="text" name="password"/></br>
+        <input type="text"/></br>
         </td>
         </tr>
         <tr>
         <td>
         <label>EMAIL:</label></td><td>
-        <input type="text" name="email"/></br></td>
+        <input type="text"/></br></td>
         </tr>
         <tr>
         <td>
-        <input type="button" name="register" value="REGISTER" onclick="register()"/></td></tr>
+        <input type="button" name="register" value="REGISTER"/></td></tr>
         </table>
     </div>
 </div>  
@@ -128,61 +143,15 @@ function addMoreOptions()
       
       
     </div>
-    <div id="skip-menu"></div>
-    <div class="column-right">
+    
+    <div id = "column-right"  class="column-right">
       <div class="box">
-        <div class="box-top"></div>
-        <div class="box-in">
-          <h2>Welcome to Polling System</h2>
-         <div id="divMainPageContainer">
-
-<div id="divMainPageCenter">
-<input type="button" name="createNewPoll" value="createNewPoll" onclick="openCreateNewPoll();">
-<div id="divCreateNewPoll">
-
-<label>CREATE POLL</label></br>
-<textarea rows="1" cols="50"></textarea>
-<div id="options">
-<label>Option 1</label></br>
-<input type="text"></br>
-<label>Option 2</label></br>
-<input type="text"></br>
-<div id="addMoreOptions">
-
-</div>
-<input type="button" name="addMoreOptions" value="addMoreOptions" onclick="addMoreOptions();">
-
-</div>
-
-</div>
-</div>
-</div>
         </div>
       </div>
-      <div class="box-bottom">
-        <hr class="noscreen" />
-        <div class="footer-info-left"><a href=""></a></div>
-        <div class="footer-info-right"><a href=""></a></div>
-      </div>
+      
     </div>
     <div class="cleaner">&nbsp;</div>
   </div>
 </div>
-<div align=center>OSSCUBE<a href='http://www.osscube.com>OSSCUBE.COM'></a></div></body>
-<head>
-<script type="text/javascript">
-function register() {
-	$.post('index.php',
-			{
-		'controller':'MainController',
-		'method':'registerUser'
-			},function(data,status){
-					if(status == "success") {
-						if
-						
-					}
-				});
-}
-</script>
-</head>
+<div align=center>OSSCUBE<a href='http://www.osscube.com'>  OSSCUBE.COM</a></div></body>
 </html>

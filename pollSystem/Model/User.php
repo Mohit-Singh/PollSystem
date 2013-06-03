@@ -108,4 +108,9 @@ class User extends DBConnection {
 			return true;
 		}
 	}
+	
+	public function login($data){
+	    return $this->_db->select($data);
+	    
+	}
 }
