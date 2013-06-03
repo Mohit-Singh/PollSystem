@@ -153,7 +153,7 @@ function AddQuestion() {
 					</tr>
 					<tr>
 						<td><label>PASSWORD:</label></td>
-						<td><input type="text" name="password" id="password" /></br></td>
+						<td><input type="text" name="password" id="registerpassword" /></br></td>
 					</tr>
 					<tr>
 						<td><label>EMAIL:</label></td>
