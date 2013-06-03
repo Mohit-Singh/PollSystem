@@ -131,4 +131,12 @@ class User extends DBConnection {
 		return $result;
 		
 	}
+	public function getOption($questionID){
+	    $data['columns'] =array("poll","text");
+	    $data['tables'] = 'options';
+	    $data['conditions'] = array(array('question_id = "'.$questionID.'" AND status = "TRUE"'),true);
+	
+	    $result = $this->_db->select($data);
+	    return $result;
+	}	
 }
