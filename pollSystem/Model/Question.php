@@ -30,10 +30,24 @@ class Question extends DBConnection {
 		$this->_Text = $_Text;
 	}
 	
-	public function insert() {
-		echo "hello";
-		echo "</br>";
-		print_r($_POST);
+	public function insertQuestion() {
+// 		print_r($_POST);
+		
+		$this->_db->insert("question",array('text'=>$_POST['question'],'login_username'=>$_SESSION["user_name"]));
+		$id = $this->_db->getLastInsertId();
+		unset($_POST['question']);
+
+		$value = array('question_id'=>$id,
+				'text'=>'',
+				'poll'=>0
+		);
+		
+		foreach ($_POST as $key => $val) {
+			$value['text'] = $_POST[$val];
+			$this->_db->insert("options",$value);
+		}
+		
+		
 	}
 
 }

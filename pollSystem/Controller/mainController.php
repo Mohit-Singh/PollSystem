@@ -65,7 +65,7 @@ class MainController extends Acontroller{
     
     public function AddQuestion() {
     	$obj = $this->loadModel("Question");
-    	$obj->insert();
+    	$obj->insertQuestion();
     }
     public function viewPreviousPolls()
     {
