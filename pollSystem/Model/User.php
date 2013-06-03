@@ -97,7 +97,7 @@ class User extends DBConnection {
 			$insertValues = array('first_name'=>$this->getFirstName(),
 					'last_name'=>$this->getLastName(),
 					'username'=>$this->getUserName(),
-					'password'=>$this->getPassword(),
+					'password'=>md5($this->getPassword()),
 					'status'=>$this->getStatus()
 			);
 			$this->_db->insert($data['tables'],$insertValues);

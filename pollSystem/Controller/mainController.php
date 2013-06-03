@@ -31,8 +31,9 @@ class MainController extends Acontroller{
             // print($password);
             // print(md5($password));
             if ($row['username'] == $userName) {
+            	//print($password);
                 if ($row['password'] == md5($password)) {
-                    //print("ok");
+                   // print(md5($password));
                     $_SESSION['username'] = $userName;
                     $this->loadView('poll');
                 } else {

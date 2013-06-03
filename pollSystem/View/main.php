@@ -88,7 +88,7 @@ function register() {
 		'firstName':$('#firstName').val(),
 		'lastName':$('#lastName').val(),
 		'email':$('#email').val(),
-		'password':$('#password').val(),
+		'password':$('#registerPassword').val(),
 			},function(data,status){
 					if(status == "success") {
 						if(data.trim() == "true") {
@@ -153,7 +153,7 @@ function AddQuestion() {
 					</tr>
 					<tr>
 						<td><label>PASSWORD:</label></td>
-						<td><input type="text" name="password" id="registerpassword" /></br></td>
+						<td><input type="text" name="password" id="registerPassword" /></br></td>
 					</tr>
 					<tr>
 						<td><label>EMAIL:</label></td>
