@@ -5,7 +5,7 @@ abstract class Acontroller
 	{
 		include_once SITE_PATH .'/libraries/DBconnect.php';
 		include SITE_PATH .'/Model/'.$modelName . '.php';
-		
+		return new $modelName();
 	}
 	
 	function loadView($viewName="")

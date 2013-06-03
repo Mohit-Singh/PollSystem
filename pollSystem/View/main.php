@@ -94,7 +94,7 @@ function addMoreOptions()
     <td>
         <label>FIRSTNAME:</label></td>
         <td>
-        <input type="text"/></br>
+        <input type="text" name="firstName"/></br>
        </td>
         </tr>
         <tr>
@@ -102,7 +102,7 @@ function addMoreOptions()
         <label>LASTNAME:</label>
         </td>
         <td>
-        <input type="text"/></br>
+        <input type="text"name="lastName"/></br>
         </td>
         </tr>
         <tr>
@@ -110,17 +110,17 @@ function addMoreOptions()
         <label>PASSWORD:</label>
         </td>
         <td>
-        <input type="text"/></br>
+        <input type="text" name="password"/></br>
         </td>
         </tr>
         <tr>
         <td>
         <label>EMAIL:</label></td><td>
-        <input type="text"/></br></td>
+        <input type="text" name="email"/></br></td>
         </tr>
         <tr>
         <td>
-        <input type="button" name="register" value="REGISTER"/></td></tr>
+        <input type="button" name="register" value="REGISTER" onclick="register()"/></td></tr>
         </table>
     </div>
 </div>  
@@ -169,4 +169,20 @@ function addMoreOptions()
   </div>
 </div>
 <div align=center>OSSCUBE<a href='http://www.osscube.com>OSSCUBE.COM'></a></div></body>
+<head>
+<script type="text/javascript">
+function register() {
+	$.post('index.php',
+			{
+		'controller':'MainController',
+		'method':'registerUser'
+			},function(data,status){
+					if(status == "success") {
+						if
+						
+					}
+				});
+}
+</script>
+</head>
 </html>

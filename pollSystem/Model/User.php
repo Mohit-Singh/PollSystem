@@ -83,15 +83,15 @@ class User extends DBConnection {
 		$this->status = $status;
 	}
 
-	public function registerUser($arr = array()) {
+	public function register($arr = array()) {
 		$this->setUserName($arr['email']);
 		$this->setStatus('true');
-		$data['coloums'] ='email';
+		$data['coloums'] ='username';
 		$data['tables'] = 'login';
-		$data['conditions'] = array('email = '."'$this->getUserName()'".' AND status = '."'$this->getStatus()'");
+		$data['conditions'] = array('username = '."'$this->getUserName()'".' AND status = '."'$this->getStatus()'");
 		$result = $this->_db->select($data);
 		if(mysql_num_rows($result->fetch(PDO::FETCH_ASSOC))) {
-			return("user alredy exists");
+			return false;
 		}
 		else {
 			$this->setFirstName($arr['firstName']);
@@ -104,7 +104,7 @@ class User extends DBConnection {
 					'password'=>$this->getPassword(),
 					'status'=>$this->getStatus()
 			);
-			$this->_db->insert($data['tables'],$insertValue);
+			$this->_db->insert($data['tables'],$insertValues);
 			return true;
 		}
 	}
