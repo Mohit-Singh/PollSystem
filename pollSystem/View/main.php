@@ -3,11 +3,12 @@
 <head>
 <title>Polling System</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="View/css/style.css" type="text/css" media="screen, projection, tv" />
-<link rel="stylesheet" href="View/css/style-print.css" type="text/css" media="print" />
+<link rel="stylesheet" href="View/css/style.css" type="text/css"
+	media="screen, projection, tv" />
+<link rel="stylesheet" href="View/css/style-print.css" type="text/css"
+	media="print" />
 
 <style>
-
 </style>
 <script src="View/jquery1/jquery.erasing-1.3.4.js"></script>
 <script src="View/jquery1/jquery.js"></script>
@@ -16,10 +17,11 @@
 <script src="View/jquery1/jquery.fancybox-1.3.4.pack.js"></script>
 
 <script src="View/jquery1/jquery.mousewheel-3.0.4.pack.js"></script>
-<link rel="stylesheet" href="View/jquery1/jquery.fancybox-1.3.4.css" type="text/css" media="screen">
+<link rel="stylesheet" href="View/jquery1/jquery.fancybox-1.3.4.css"
+	type="text/css" media="screen">
 
 
-<script>
+	<script>
 $(document).ready(function(){
 
 	
@@ -100,19 +102,23 @@ function register() {
 					}
 				});
 }
+
+function AddQuestion() {
+	alert("avni");
+	$.ajax({
+        url : './index.php?controller=mainController&method=AddQuestion',
+        type : 'post',
+        data : $("#submitForm").serialize(),                
+        success : function(data){
+        }
+});
+}
+
 </script>
 
 </head>
 <body>
-<div id="wrapper">
-  
-  <hr class="noscreen" />
-  <div class="content">
-    <div id = "column-left" class="column-left">
-      <h3>LOGIN/REGISTER</h3>
-          
-       <p><a id="register" href="#registerDiv">REGISTER</a></p>
-       <p><a id="login" href="#loginDiv">LOGIN</a></p>
+	<div id="wrapper">
 
 <div class="hidden">
     <div id="loginDiv">

@@ -55,6 +55,11 @@ class MainController extends Acontroller{
     		die("false");
     	}
     }
+    
+    public function AddQuestion() {
+    	$obj = $this->loadModel("Question");
+    	$obj->insert();
+    }
 }
 
 // $ob=new mainController();

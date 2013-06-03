@@ -29,5 +29,11 @@ class Question extends DBConnection {
 	public function setText($_Text) {
 		$this->_Text = $_Text;
 	}
+	
+	public function insert() {
+		echo "hello";
+		echo "</br>";
+		print_r($_POST);
+	}
 
 }
