@@ -109,4 +109,15 @@ class User extends DBConnection {
 	    return $this->_db->select($data);
 	    
 	}
+	public function viewPreviousPolls()
+	{
+		$data['columns']=array('text');
+		$data['tables'] = 'question';
+		
+		$result = $this->_db->select($data);
+		return $result;
+		
+	}
+	
+	
 }

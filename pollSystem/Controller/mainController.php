@@ -61,6 +61,25 @@ class MainController extends Acontroller{
     	$obj = $this->loadModel("Question");
     	$obj->insert();
     }
+    public function viewPreviousPolls()
+    {
+    	    	 
+    	$userObj = $this->loadModel('User');
+    	$result = $userObj->viewPreviousPolls();
+    	
+    	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    	
+    		echo $row['text'];
+    		die;
+    	}
+    	
+//     	 print_r($result);
+//     	 die;
+    	 
+    	 
+    }
+    
+    
 }
 
 // $ob=new mainController();

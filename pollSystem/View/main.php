@@ -113,6 +113,19 @@ function AddQuestion() {
         }
 });
 }
+function viewPreviousPolls()
+{
+	 $.ajax({
+         url : './index.php?controller=mainController&method=viewPreviousPolls',
+         type : 'post',
+//          data : "userName="+$("#userName").val()+"&password="+$("#password").val(),                
+         success : function(data){
+ 
+             $("#box1").html('');
+             $("#box1").append(data);
+         }
+ });
+}
 
 </script>
 
@@ -127,7 +140,7 @@ function AddQuestion() {
          
        <p><a id="register" href="#registerDiv">REGISTER</a></p>
        <p><a id="login" href="#loginDiv">LOGIN</a></p>
-       
+       <p><a id="viewPolling" href="#" onclick="viewPreviousPolls();">VIEW POLLINGS</a></p>
 
 		<div class="hidden">
 			<div id="loginDiv">
@@ -171,7 +184,8 @@ function AddQuestion() {
 	</div>
 
 	<div id="column-right" class="column-right">
-		<div class="box"></div>
+	
+		<div id="box1" class="box"></div>
 	</div>
 
 	</div>
