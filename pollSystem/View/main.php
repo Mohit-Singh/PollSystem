@@ -28,8 +28,13 @@ $(document).ready(function(){
 			if(isset($_SESSION["username"]))
 			{
 				
-				echo "$.post('index.php',{'loginStatus':'true'},function(data){ $('#column-left').hide(); $('#column-right').html(data);  });";
+				echo "$.post('index.php',{'loginStatus':'true'},function(data){ $('#column-left').hide(); $('#column-right').html(data); $('#logOut').show(); });";
 			}
+			else 
+			{
+				echo  "$('#logOut').hide();";
+			}
+			
 
 	?>
 	
@@ -59,6 +64,7 @@ $(document).ready(function(){
                 data : "userName="+$("#userName").val()+"&password="+$("#password").val(),                
                 success : function(data){
                 	$("#column-left").hide(); 
+                	$('#logOut').show();
                     $("#column-right").html(data);
                 }
         });
@@ -122,6 +128,17 @@ function AddQuestion() {
         }
 });
 }
+
+function logOutUser() {
+	$.ajax({
+        url : './index.php?controller=mainController&method=userLogOut',
+        type : 'post',          
+        success : function(data){
+            location.reload();
+        }
+});
+}
+
 function viewPreviousPolls()
 {
 	 $.ajax({
@@ -139,10 +156,17 @@ function viewPreviousPolls()
 
 
 </script>
-
+<style>
+#logOut
+{
+	float: right;
+	margin-right: 50px;
+}
+</style>
 
 </head>
 <body>
+	<div id="logOut"><a href="#" onclick="logOutUser();">LogOut</a></div>
 	<div id="wrapper">
 	
 	<hr class="noscreen" />

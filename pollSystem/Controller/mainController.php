@@ -85,6 +85,11 @@ class MainController extends Acontroller{
     	 
     }
     
+    function userLogOut()
+    {
+    	session_destroy();
+    }
+    
     
 }
 
