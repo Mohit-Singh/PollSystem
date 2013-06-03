@@ -44,10 +44,8 @@ if (isset ( $_REQUEST ['controller'] )) {
 else
 {
 /* Showing the main Login view */
-    require_once getcwd().'/Controller/mainController.php';
     $objMainController = new mainController();
     $objMainController->loadView("main");
-
 }
  
 
