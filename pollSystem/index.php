@@ -40,12 +40,17 @@ if (isset ( $_REQUEST ['controller'] )) {
 			}
 
 	}
+}else if (isset($_POST['loginStatus']))
+{
+	$objMainController = new MainController();
+	$objMainController->loadView("poll");
 }
 else
 {
-/* Showing the main Login view */
-    $objMainController = new mainController();
-    $objMainController->loadView("main");
+
+		/* Showing the main Login view */
+	    $objMainController = new MainController();    
+	    $objMainController->loadView("main");
 }
  
 

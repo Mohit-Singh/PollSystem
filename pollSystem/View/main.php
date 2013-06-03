@@ -24,6 +24,14 @@
 	<script>
 $(document).ready(function(){
 
+	<?php 
+			if(isset($_SESSION["username"]))
+			{
+				
+				echo "$.post('index.php',{'loginStatus':'true'},function(data){ $('#column-left').hide(); $('#column-right').html(data);  });";
+			}
+
+	?>
 	
 	$("#divCreateNewPoll").hide();
 	
@@ -127,7 +135,10 @@ function viewPreviousPolls()
  });
 }
 
+
+
 </script>
+
 
 </head>
 <body>
