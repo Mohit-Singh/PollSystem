@@ -63,6 +63,7 @@ $(document).ready(function(){
                 type : 'post',
                 data : "userName="+$("#userName").val()+"&password="+$("#password").val(),                
                 success : function(data){
+                   
                 	$("#column-left").hide(); 
                 	$('#logOut').show();
                     $("#column-right").html(data);
@@ -141,14 +142,29 @@ function logOutUser() {
 
 function viewPreviousPolls()
 {
+	$.ajax({
+        url : './index.php?controller=mainController&method=loadPreviousPoll',
+        type : 'post',
+        async:false,
+//         data : "userName="+$("#userName").val()+"&password="+$("#password").val(),                
+        success : function(data){
+     
+         
+            $("#box1").html('');
+            $("#box1").append(data);
+        }
+});
+
+	
 	 $.ajax({
          url : './index.php?controller=mainController&method=viewPreviousPolls',
          type : 'post',
 //          data : "userName="+$("#userName").val()+"&password="+$("#password").val(),                
          success : function(data){
- 
-             $("#box1").html('');
-             $("#box1").append(data);
+           
+          
+             $("#previousPollDiv").html('');
+             $("#previousPollDiv").append(data);
          }
  });
 }

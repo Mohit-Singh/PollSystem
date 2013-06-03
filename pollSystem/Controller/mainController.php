@@ -75,14 +75,21 @@ class MainController extends Acontroller{
     	
     	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     	
-    		echo $row['text'];
-    		die;
+    		$str="id:".$row['id']."Question:".$row['text']."<button onclick='showOpinions(".$row['id'].");'>Show Opinions</button></br>";
+    		echo $str;
+    		
     	}
     	
 //     	 print_r($result);
 //     	 die;
     	 
     	 
+    }
+    public function loadPreviousPoll()
+    {
+    	return $this->loadView('previouspoll');
+    		
+    
     }
     
     function userLogOut()

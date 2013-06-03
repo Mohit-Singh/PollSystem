@@ -111,7 +111,7 @@ class User extends DBConnection {
 	}
 	public function viewPreviousPolls()
 	{
-		$data['columns']=array('text');
+		$data['columns']=array('text','id');
 		$data['tables'] = 'question';
 		
 		$result = $this->_db->select($data);
