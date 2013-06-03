@@ -91,6 +91,20 @@ class MainController extends Acontroller{
     		
     
     }
+    public function showOpinions()
+    {
+    	$id=$_POST['questionid'];
+    	$userObj = $this->loadModel('User');
+    	$result = $userObj->showOpinions($id);
+    	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    		 
+    		$str="OPTION:".$row['text']."</br>";
+    		echo $str;
+    	
+    	}
+    	
+    	 
+    }
     
     function userLogOut()
     {

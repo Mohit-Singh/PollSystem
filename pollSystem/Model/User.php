@@ -119,5 +119,16 @@ class User extends DBConnection {
 		
 	}
 	
-	
+	public function showOpinions($id)
+	{
+
+		$data['columns']=array('text');
+		$data['tables'] = 'options';
+		$data['conditions'] = array('question_id' => $id);
+		
+		
+		$result = $this->_db->select($data);
+		return $result;
+		
+	}
 }
