@@ -44,5 +44,16 @@ class PolledBy extends DBConnection {
 	public function setLoginUsername($_LoginUsername) {
 		$this->_LoginUsername = $_LoginUsername;
 	}
+	public function makePoll($arrPollValue){
+		$field=array();
+		$this->setLoginUsername($arrPollValue['LoginUsername']);
+		$this->setOptionId($arrPollValue['OptionId']);
+		$this->setQuestionId($arrPollValue['QuestionId']);
+		$field['question_id']=$this->getQuestionId();
+		$field['options_id']=$this->getOptionId();
+		$field['login_username']=$this->getLoginUsername();
+		$result=$this->_db->insert('polled_by',$field);
+	}
+	
 
 }
