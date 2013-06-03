@@ -1,15 +1,15 @@
 <?php
-require_once 'Acontroller.php';
 
-class mainController extends Acontroller{
+class MainController extends Acontroller{
 	
-	public function start() {
-	/*	if((isset($_REQUEST['request']))&&($_REQUEST['request']=="")) {
-			$this->functn();
-		}*/
+	
+	public function insertComment() {
+		echo "in contr";
+		print_r($_POST);die;
+		$this->loadModel("commentModel");
+		
 	}
 }
 
-$ob=new mainController();
-$ob->start();
+
 ?>
