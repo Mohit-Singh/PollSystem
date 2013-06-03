@@ -23,6 +23,11 @@ $(document).ready(function() {
 				 $("#comments").append(" posted by ");
 				$("#comments").append(value['login_username']);
 				 $("#comments").append("</br>");
+				 $("#comments").append("on ");
+				 
+				 $("#comments").append(value['date_time']);
+				 $("#comments").append("</br>");
+				 $("#comments").append("--------------------------</br>");
 			});
 			
 			
@@ -40,11 +45,12 @@ $.ajax({
 	     data: $('#commentform').serialize(),
 	       success: function(data){
 			obj = jQuery.parseJSON(data);
-			 $("#comments").append("<br/>");
+			 //$("#comments").append("---------------------------------");
 	    	 $("#comments").append(obj[1]);
-	    	 $("#comments").append("posted by ");
+	    	 $("#comments").append(" posted by ");
 	    	 $("#comments").append(obj[0]);
-		    
+	    	 $("#comments").append("</br>");
+			 $("#comments").append("---------------------</br>");
 	     }
 	  });
 } 

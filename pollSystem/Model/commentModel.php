@@ -14,7 +14,7 @@ class commentModel extends DBConnection {
 	}
 	public function getComments($qid) {
 		//echo ("in model");
-		$data['columns']	= array('text', 'login_username');
+		$data['columns']	= array('text', 'login_username','date_time');
 		$data['tables']		= 'comment';
 		$data['conditions']		= array('question_id' => $qid);
 		$result = $this->_db->select($data);
