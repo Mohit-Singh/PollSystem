@@ -111,9 +111,16 @@ class MainController extends Acontroller{
     	session_destroy();
     }
     
+    public function pollLoad(){
+    	$objPollLoad=$this->loadModel("PolledBy");
+    	$que=$objPollLoad->selectPoll($_POST['queId']);
+    	print_r($que);
+    	return $que;
+    }
     
 }
 
 // $ob=new mainController();
 // $ob->start();
+
 ?>

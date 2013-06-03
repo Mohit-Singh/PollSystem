@@ -1,3 +1,20 @@
+
+
+<script type="text/javascript">
+$("#dopoll").click(function() {
+
+	$.ajax({
+        url: './index.php?controller=mainController&method=pollLoad',
+        type: 'POST',
+        data: $('#QuestionForm').serialize(),
+        success: function (select) {
+            alert(select);
+            $("#contentrender").html(select);
+           // $("#grdSearch").fadeIn(6000);
+        }   
+    });
+});
+</script>
 <div class="box-in">
 	<h2>Welcome to Polling System</h2>
 	<div id="divMainPageContainer">
@@ -29,7 +46,14 @@
 				<input type="button" name="addMoreOptions" value="Add More Options"
 					onclick="addMoreOptions();" />
 			</div>
-
+			<div id="question">
+			<form id="QuestionForm">
+				
+				<input type="text" name="queId">
+				<input type="button" name="dopoll" id="dopoll" value="dopoll" />	
+			</form>
+			</div>
+			
 		</div>
 	</div>
 </div>

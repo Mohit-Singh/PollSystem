@@ -32,11 +32,12 @@ if (isset ( $_REQUEST ['controller'] )) {
 			//print $_REQUEST ["method"];die;
 			if (method_exists ( $object, $_REQUEST ["method"] )) {
 			
-				$object->$_REQUEST ["method"] ();
-				if($_REQUEST ["method"]=='fetch')
+				$Question=$object->$_REQUEST ["method"] ();
+				if($_REQUEST ["method"]=='pollLoad')
 				{
-					echo $_REQUEST ["method"];
+					$object->loadView("dopoll",$Question);
 				}
+				
 			}
 
 	}

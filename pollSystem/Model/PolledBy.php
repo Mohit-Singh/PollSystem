@@ -54,6 +54,30 @@ class PolledBy extends DBConnection {
 		$field['login_username']=$this->getLoginUsername();
 		$result=$this->_db->insert('polled_by',$field);
 	}
+	public function selectPoll($queId){
+		$data['columns']	= array('text');
+		$data['tables']=array('question');
+		$data['conditions']=array(array('id ="'.$queId.'"'),true);
+		$result=$this->_db->select($data);
+		while ($row = $result->fetch(PDO::FETCH_ASSOC))
+		{
+			$r['question']=$row['text'];
+		}
+		$data=array();
+		$data['columns']	= array('text','id');
+		$data['tables']=array('options');
+		$data['conditions']=array(array('status ="TRUE"'),true);
+		$res=$this->_db->select($data);
+		$i=1;
+		while ($row = $result->fetch(PDO::FETCH_ASSOC))
+		{
+			$r['option'.$i]=$row['text'];
+			$r['id'.$i]=$row['id'];
+			$i++;
+		}
+		return $r;
+	}
+	
 	
 
 }

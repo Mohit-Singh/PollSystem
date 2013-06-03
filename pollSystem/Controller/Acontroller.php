@@ -8,7 +8,7 @@ abstract class Acontroller
 		return new $modelName();
 	}
 	
-	function loadView($viewName="")
+	function loadView($viewName="",$data=array())
 	{
 		include SITE_PATH .'/View/'.$viewName . '.php';
 	}
