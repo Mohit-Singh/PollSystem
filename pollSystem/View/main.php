@@ -112,12 +112,13 @@ function register() {
 }
 
 function AddQuestion() {
-	alert("avni");
 	$.ajax({
         url : './index.php?controller=mainController&method=AddQuestion',
         type : 'post',
         data : $("#submitForm").serialize(),                
         success : function(data){
+            alert("Succesfully saved");
+            $("#column-right").load("./View/poll.php");
         }
 });
 }

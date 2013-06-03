@@ -31,9 +31,8 @@ class Question extends DBConnection {
 	}
 	
 	public function insertQuestion() {
-// 		print_r($_POST);
 		
-		$this->_db->insert("question",array('text'=>$_POST['question'],'login_username'=>$_SESSION["user_name"]));
+		$this->_db->insert("question",array('text'=>$_POST['question'],'login_username'=>$_SESSION["username"]));
 		$id = $this->_db->getLastInsertId();
 		unset($_POST['question']);
 
@@ -43,7 +42,7 @@ class Question extends DBConnection {
 		);
 		
 		foreach ($_POST as $key => $val) {
-			$value['text'] = $_POST[$val];
+			$value['text'] = $_POST[$key];
 			$this->_db->insert("options",$value);
 		}
 		
