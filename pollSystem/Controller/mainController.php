@@ -7,7 +7,6 @@ class MainController extends Acontroller{
 		echo "in contr";
 		print_r($_POST);die;
 		$this->loadModel("commentModel");
-		
 	}
 	public function login(){
 	    $userName = $_POST['userName'];
@@ -43,6 +42,18 @@ class MainController extends Acontroller{
                 echo json_encode("error : Account Does not exist");
             }
         }
+    }
+    
+    
+    public function registerUser() {
+    	$userObj = $this->loadModel('User');
+    	$returnValue = $userObj->register($_POST);
+    	if($returnValue) {
+    		die("true");
+    	}
+    	else {
+    		die("false");
+    	}
     }
 }
 

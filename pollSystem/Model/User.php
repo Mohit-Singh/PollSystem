@@ -8,89 +8,85 @@ class User extends DBConnection {
 
 
 
-	/**
-	 * @return the $lastName
-	 */
-	public function getLastName() {
-		return $this->lastName;
-	}
 
 	/**
-	 * @param field_type $lastName
-	 */
-	public function setLastName($lastName) {
-		$this->lastName = $lastName;
-	}
-
-	/**
-	 * @return the $userName
-	 */
-	public function getUserName() {
-		return $this->userName;
-	}
-
-	/**
-	 * @param field_type $userName
-	 */
-	public function setUserName($userName) {
-		$this->userName = $userName;
-	}
-
-	/**
-	 * @return the $firstName
+	 * @return the $_firstName
 	 */
 	public function getFirstName() {
-		return $this->firstName;
+		return $this->_firstName;
 	}
 
-
+	/**
+	 * @return the $_lastName
+	 */
+	public function getLastName() {
+		return $this->_lastName;
+	}
 
 	/**
-	 * @return the $password
+	 * @return the $_userName
+	 */
+	public function getUserName() {
+		return $this->_userName;
+	}
+
+	/**
+	 * @return the $_password
 	 */
 	public function getPassword() {
-		return $this->password;
+		return $this->_password;
 	}
 
 	/**
-	 * @return the $status
+	 * @return the $_status
 	 */
 	public function getStatus() {
-		return $this->status;
+		return $this->_status;
 	}
 
 	/**
-	 * @param field_type $firstName
+	 * @param field_type $_firstName
 	 */
-	public function setFirstName($firstName) {
-		$this->firstName = $firstName;
-	}
-
-
-
-
-	/**
-	 * @param field_type $password
-	 */
-	public function setPassword($password) {
-		$this->password = $password;
+	public function setFirstName($_firstName) {
+		$this->_firstName = $_firstName;
 	}
 
 	/**
-	 * @param field_type $status
+	 * @param field_type $_lastName
 	 */
-	public function setStatus($status) {
-		$this->status = $status;
+	public function setLastName($_lastName) {
+		$this->_lastName = $_lastName;
 	}
 
-	public function register($arr = array()) {
+	/**
+	 * @param field_type $_userName
+	 */
+	public function setUserName($_userName) {
+		$this->_userName = $_userName;
+	}
+
+	/**
+	 * @param field_type $_password
+	 */
+	public function setPassword($_password) {
+		$this->_password = $_password;
+	}
+
+	/**
+	 * @param field_type $_status
+	 */
+	public function setStatus($_status) {
+		$this->_status = $_status;
+	}
+
+	public function register($arr) {
 		$this->setUserName($arr['email']);
 		$this->setStatus('true');
-		$data['coloums'] ='username';
+		$data['columns'] ='username';
 		$data['tables'] = 'login';
-		$data['conditions'] = array('username = '."'$this->getUserName()'".' AND status = '."'$this->getStatus()'");
+		$data['conditions'] = array(array('username = "'.$this->getUserName().'" AND status = "'.$this->getStatus().'"'),true);
 		$result = $this->_db->select($data);
-		if(mysql_num_rows($result->fetch(PDO::FETCH_ASSOC))) {
+		if(($row=$result->fetch(PDO::FETCH_ASSOC))) {
 			return false;
 		}
 		else {
@@ -100,7 +96,7 @@ class User extends DBConnection {
 				
 			$insertValues = array('first_name'=>$this->getFirstName(),
 					'last_name'=>$this->getLastName(),
-					'user_name'=>$this->getUserName(),
+					'username'=>$this->getUserName(),
 					'password'=>$this->getPassword(),
 					'status'=>$this->getStatus()
 			);

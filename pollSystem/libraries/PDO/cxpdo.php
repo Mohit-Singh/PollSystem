@@ -104,7 +104,7 @@ class cxpdo extends PDO {
 		. (!empty($data['order']) ? $this->order_by($data['order']) : '')
 		. (!empty($data['limit']) ? $this->limit($data['limit'], (!empty($data['offset']) ? $data['offset'] : '')) : '');
 
- 	    echo $query;
+ 	    //echo $query;
 		//Return the results -or a query string?
 		
 		return $return ? $this->query($query) : $query;

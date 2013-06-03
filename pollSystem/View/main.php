@@ -76,6 +76,30 @@ function removeRow(rowIndex){
 	
     $('#row_'+rowIndex).remove();
 }
+
+
+function register() {
+	$.post('index.php',
+			{
+		'controller':'mainController',
+		'method':'registerUser',
+		'firstName':$('#firstName').val(),
+		'lastName':$('#lastName').val(),
+		'email':$('#email').val(),
+		'password':$('#password').val(),
+			},function(data,status){
+					if(status == "success") {
+						if(data.trim() == "true") {
+							alert("you are successfully registered");
+							parent.$.fancybox.close();
+						}
+						else {
+							alert("same email id alredy registered");
+							parent.$.fancybox.close();
+						}
+					}
+				});
+}
 </script>
 
 </head>
@@ -101,7 +125,7 @@ function removeRow(rowIndex){
     </div>
 </div>
       
-<div class="hidden">
+    <div class="hidden">
     <div id="registerDiv">
     <h2>REGISTER</h2>
     <table>
@@ -109,7 +133,7 @@ function removeRow(rowIndex){
     <td>
         <label>FIRSTNAME:</label></td>
         <td>
-        <input type="text"/></br>
+        <input type="text" name="firstName" id="firstName"/></br>
        </td>
         </tr>
         <tr>
@@ -117,7 +141,7 @@ function removeRow(rowIndex){
         <label>LASTNAME:</label>
         </td>
         <td>
-        <input type="text"/></br>
+        <input type="text"name="lastName" id="lastName"/></br>
         </td>
         </tr>
         <tr>
@@ -125,21 +149,20 @@ function removeRow(rowIndex){
         <label>PASSWORD:</label>
         </td>
         <td>
-        <input type="text"/></br>
+        <input type="text" name="password" id="password"/></br>
         </td>
         </tr>
         <tr>
         <td>
         <label>EMAIL:</label></td><td>
-        <input type="text"/></br></td>
+        <input type="text" name="email" id="email"/></br></td>
         </tr>
         <tr>
         <td>
-        <input type="button" name="register" value="REGISTER"/></td></tr>
+        <input type="button" name="register" value="REGISTER" onclick="register()"/></td></tr>
         </table>
     </div>
 </div>  
-      
       
       
     </div>
@@ -155,3 +178,5 @@ function removeRow(rowIndex){
 </div>
 <div align=center>OSSCUBE<a href='http://www.osscube.com'>  OSSCUBE.COM</a></div></body>
 </html>
+
+
