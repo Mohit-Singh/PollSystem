@@ -1,10 +1,10 @@
 <?php
 class User extends DBConnection {
-	private $firstName;
-	private $lastName;
-	private $userName; // email of user
-	private $password;
-	private $status;
+	private $_firstName;
+	private $_lastName;
+	private $_userName; // email of user
+	private $_password;
+	private $_status;
 
 
 
