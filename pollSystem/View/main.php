@@ -119,6 +119,15 @@ function AddQuestion() {
 </head>
 <body>
 	<div id="wrapper">
+	
+	<hr class="noscreen" />
+  <div class="content">
+    <div id = "column-left" class="column-left">
+      <h3>LOGIN/REGISTER</h3>
+         
+       <p><a id="register" href="#registerDiv">REGISTER</a></p>
+       <p><a id="login" href="#loginDiv">LOGIN</a></p>
+       
 
 		<div class="hidden">
 			<div id="loginDiv">
