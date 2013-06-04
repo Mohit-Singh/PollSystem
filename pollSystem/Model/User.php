@@ -148,7 +148,20 @@ class User extends DBConnection {
 	
 	    $result = $this->_db->select($data);
 	    return $result;
-	}	
+	}
+	public function getTotalPoll($question_id){
+	    $data['columns'] =array("count(*) count");
+	    $data['tables'] = 'polled_by';
+	    $data['conditions'] = array(array('question_id = "'.$question_id.'"'),true);
+	    $data['group_by'] = array('options_id');
+	    
+	    $result = $this->_db->select($data);
+	    $row = $result->fetchAll(PDO::FETCH_ASSOC);
+//  	    print_r ($row);
+//  	    die;
+	    return $row;
+	}
+	
 	
 	public function getAllPolls()
 	{

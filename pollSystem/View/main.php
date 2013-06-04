@@ -270,7 +270,7 @@ function viewPreviousPolls()
        <p><a id="register" href="#registerDiv">REGISTER</a></p>
        <p><a id="login" href="#loginDiv">LOGIN</a></p>
        
-       <!--  <p><a id="viewPolling" href="#" onclick="viewPreviousPolls();">VIEW POLLINGS</a></p>-->
+     <p><a id="viewPolling" href="#" onclick="viewPreviousPolls();">VIEW POLLINGS</a></p> 
 
 		<div class="hidden">
 			<div id="loginDiv">

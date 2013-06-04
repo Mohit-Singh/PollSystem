@@ -92,12 +92,14 @@ class MainController extends Acontroller{
     	$result = $userObj->showOpinions($id);
     	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     		 
-    		$str="OPTION:".$row['options']."</br>";
-    		echo $str;
-    	
+    		$str[] = "OPTION:".$row['options'];
     	}
-    	
-    	 
+    	$str[] = 	"<img id=\"activityReportIMG\" alt=\"userActivityReport\"
+    		        . src=\"index.php?controller=PollGraph&method=createGraph"
+    		        ."&question=".$id
+    		        ."&raw=".microtime()."\" width=\"220\" height=\"200\">";
+    	echo json_encode($str);
+    	$userObj->getTotalPoll(1);
     }
     
     function userLogOut()
