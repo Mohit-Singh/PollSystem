@@ -32,17 +32,16 @@ class Question extends DBConnection {
 	
 	public function insertQuestion() {
 		
-		$this->_db->insert("question",array('text'=>$_POST['question'],'login_username'=>$_SESSION["username"]));
+		$this->_db->insert("question",array('question'=>$_POST['question'],'login_id'=>$_SESSION["userId"]));
 		$id = $this->_db->getLastInsertId();
 		unset($_POST['question']);
 
 		$value = array('question_id'=>$id,
-				'text'=>'',
-				'poll'=>0
+				'options'=>''
 		);
 		
 		foreach ($_POST as $key => $val) {
-			$value['text'] = $_POST[$key];
+			$value['options'] = $_POST[$key];
 			$this->_db->insert("options",$value);
 		}
 		

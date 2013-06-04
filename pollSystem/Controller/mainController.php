@@ -15,7 +15,8 @@ class MainController extends Acontroller{
 	
 	    $data['columns'] = array(
 	        'username',
-	        'password'
+	        'password',
+	            'id'
 	    );
 	    $data['tables'] = 'login';
 	    $data['conditions'] = array(
@@ -37,6 +38,7 @@ class MainController extends Acontroller{
                 if ($row['password'] == md5($password)) {
                    // print(md5($password));
                     $_SESSION['username'] = $userName;
+                    $_SESSION["userId"] = $row['id']; 
                     $this->loadView('poll');
                 }
                 else 
