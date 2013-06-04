@@ -10,14 +10,11 @@ media="print" />
 
 <style>
 </style>
-<script src="View/jquery1/jquery.erasing-1.3.4.js"></script>
-<script src="View/jquery1/jquery.js"></script>
+<script src="./assets/js/jquery-1.9.1.min.js"></script>
 
-<script src="View/jquery1/jquery.erasing-1.3.pack.js"></script>
-<script src="View/jquery1/jquery.fancybox-1.3.4.pack.js"></script>
 
-<script src="View/jquery1/jquery.mousewheel-3.0.4.pack.js"></script>
-<link rel="stylesheet" href="View/jquery1/jquery.fancybox-1.3.4.css"
+<script src="./assets/js/fancybox/jquery.fancybox.js"></script>
+<link rel="stylesheet" href="./assets/js/fancybox/jquery.fancybox.css"
 type="text/css" media="screen"/>
 
 
@@ -344,7 +341,7 @@ onclick="register()" /></td>
 
 
 </div>
-</div>
+
 <div align=center>
 OSSCUBE<a href='http://www.osscube.com'> OSSCUBE.COM</a>
 </div>
