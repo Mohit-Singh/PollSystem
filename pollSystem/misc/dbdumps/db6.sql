@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.31, for debian-linux-gnu (i686)
+-- MySQL dump 10.13  Distrib 5.5.24, for Win32 (x86)
 --
--- Host: localhost    Database: pollingSystem
+-- Host: localhost    Database: pollingsystem
 -- ------------------------------------------------------
--- Server version	5.5.31-0ubuntu0.12.04.1
+-- Server version	5.5.24-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,16 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Current Database: `pollingSystem`
---
-
-/*!40000 DROP DATABASE IF EXISTS `pollingSystem`*/;
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `pollingSystem` /*!40100 DEFAULT CHARACTER SET latin1 */;
-
-USE `pollingSystem`;
 
 --
 -- Table structure for table `comment`
@@ -44,7 +34,7 @@ CREATE TABLE `comment` (
   KEY `login_id` (`login_id`),
   CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`),
   CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`login_id`) REFERENCES `login` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,6 +43,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (1,1,'wat is dis',1,'0000-00-00 00:00:00','TRUE'),(2,1,'JHSFJJDF',1,'0000-00-00 00:00:00','TRUE'),(3,1,'yessss',1,'0000-00-00 00:00:00','TRUE'),(4,1,'yes its wrkg',1,'2013-06-03 22:27:28','TRUE'),(5,1,'comment done :)',1,'2013-06-03 22:30:35','TRUE'),(6,1,'bvbfh hhjh',1,'2013-06-03 23:35:50','TRUE'),(7,1,'wat happend 2 accordian :(\n',1,'2013-06-03 23:37:51','TRUE');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,4 +173,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-06-04 19:40:28
+-- Dump completed on 2013-06-04 22:42:51

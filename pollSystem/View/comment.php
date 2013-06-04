@@ -69,18 +69,18 @@ $(document).ready(function() {
 			$.each(data,function(i,value){
 				if(i==0) {
 				  $('#comments').append("<ul id='example4' class='accordion'>"); }
-				  $('#comments').append(" <li> <h3>");
-				   $("#comments").append(" posted by ");
+				  $('#comments').append("<li><h3>posted by  "+value['login_id']+" on "+value['date_time']+"<div[class='panel loading']>   "+value['comment']+"</div></li>");
+				 //  $("#comments").append(" posted by ");
 				   
-				 $("#comments").append("on ");
-				 $("#comments").append(value['date_time']);
-				 $("#comments").append("</br>");
-				$("#comments").append(value['login_id']);
-				$('#comments').append("<div class='panel loading'>");
-				$("#comments").append(value['comment']); 
-				$("#comments").append("</div></li>"); 
+				// $("#comments").append("on ");
+				// $("#comments").append(value['date_time']);
+				 //$("#comments").append("</br>");
+				//$("#comments").append(value['login_id']);
+				//$('#comments').append("<div class='panel loading'>");
+				//$("#comments").append(value['comment']); 
+				//$("#comments").append("</div></li>"); 
 				 
-				 $("#comments").append("--------------------------</br>");
+				 //$("#comments").append("--------------------------</br>");
 			});
 			
 			
