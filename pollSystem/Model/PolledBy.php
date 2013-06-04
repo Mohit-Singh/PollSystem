@@ -44,6 +44,17 @@ class PolledBy extends DBConnection {
 	public function setLoginUsername($_LoginUsername) {
 		$this->_LoginUsername = $_LoginUsername;
 	}
+	public function updatePoll($arrPollValue){
+		$field=array();
+		$this->setLoginUsername($arrPollValue['LoginUsername']);
+		$this->setOptionId($arrPollValue['OptionId']);
+		$this->setQuestionId($arrPollValue['QuestionId']);
+		$field['question_id']=$this->getQuestionId();
+		$field['options_id']=$this->getOptionId();
+		$field['login_id']=$this->getLoginUsername();
+		$where = array('login_id' => $this->getLoginUsername(),'question_id' =>$this->getQuestionId());
+		$result=$this->_db->update('polled_by',$field,$where);
+	}
 	public function makePoll($arrPollValue){
 		$field=array();
 		$this->setLoginUsername($arrPollValue['LoginUsername']);
@@ -51,33 +62,55 @@ class PolledBy extends DBConnection {
 		$this->setQuestionId($arrPollValue['QuestionId']);
 		$field['question_id']=$this->getQuestionId();
 		$field['options_id']=$this->getOptionId();
-		$field['login_username']=$this->getLoginUsername();
+		$field['login_id']=$this->getLoginUsername();
 		$result=$this->_db->insert('polled_by',$field);
 	}
-	public function selectPoll($queId){
-		$data['columns']	= array('text');
-		$data['tables']=array('question');
-		$data['conditions']=array(array('id ="'.$queId.'"'),true);
+	public function chkPoll($uId,$qId)
+	{
+		$data['tables']=array('polled_by');
+		$data['conditions']=array(array('question_id ="'.$qId.'" AND login_id ='.$uId),true);
 		$result=$this->_db->select($data);
+		
+		$myResult=array();
 		while ($row = $result->fetch(PDO::FETCH_ASSOC))
 		{
-			$r['question']=$row['text'];
+			$myResult[]=$row;
 		}
-		$data=array();
-		$data['columns']	= array('text','id');
-		$data['tables']=array('options');
-		$data['conditions']=array(array('status ="TRUE"'),true);
-		$res=$this->_db->select($data);
-		$i=1;
-		while ($row = $result->fetch(PDO::FETCH_ASSOC))
-		{
-			$r['option'.$i]=$row['text'];
-			$r['id'.$i]=$row['id'];
-			$i++;
-		}
-		return $r;
+		return  $myResult;
 	}
 	
+	public function getOptCount($optId)
+	{
+		$data['columns']=array('count(distinct(id)) as vote');
+		$data['tables']=array('polled_by');
+		$data['conditions']=array(array('options_id ='.$optId),true);
+		$result=$this->_db->select($data);
+		
+		$myResult=0;
+		while ($row = $result->fetch(PDO::FETCH_ASSOC))
+		{
+			$myResult=$row['vote'];
+		}
+		return  $myResult;
+	}
 	
-
+	public function selectPoll($queId){
+		$data['columns']	= array('question.question','options','options.id as optId','question.id as qId');
+		$data['tables']=array('question');
+		
+		$data['joins'][] = array(
+				'table' => 'options',
+				'type'	=> 'inner',
+				'conditions' => array('question.id' => 'options.question_id'));
+		
+		$data['conditions']=array(array('question.id ="'.$queId.'" AND question.status ="TRUE"'),true);
+		$result=$this->_db->select($data);
+		
+		$myResult=array();
+		while ($row = $result->fetch(PDO::FETCH_ASSOC))
+		{
+			$myResult[]=$row;
+		}
+		return  $myResult;
+	}
 }

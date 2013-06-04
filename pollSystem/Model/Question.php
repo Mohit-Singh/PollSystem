@@ -48,5 +48,19 @@ class Question extends DBConnection {
 		
 		
 	}
+	
+	public function getOption($qId)
+	{
+		$data['tables']=array('options');
+		$data['conditions']=array(array('question_id ='.$qId),true);
+		$result=$this->_db->select($data);
+		
+		$myResult=array();
+		while ($row = $result->fetch(PDO::FETCH_ASSOC))
+		{
+			$myResult[]=$row;
+		}
+		return  $myResult;
+	}
 
 }

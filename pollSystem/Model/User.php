@@ -126,7 +126,7 @@ class User extends DBConnection {
 	public function viewPreviousPolls($question_id)
 	{
 		$data['tables'] = 'question';
-		$data['conditions'] = array(array("id=".$question_id),true);
+		$data['conditions'] = array(array("id=".$question_id." AND status='TRUE'"),true);
 		$result = $this->_db->select($data);
 		$row = $result->fetchAll(PDO::FETCH_ASSOC); 
 		return $row;

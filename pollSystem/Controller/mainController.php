@@ -65,15 +65,7 @@ class MainController extends Acontroller{
     {
         $question_id = $_GET['question']; 
     	$userObj = $this->loadModel('User');
-    	$result = $userObj->viewPreviousPolls($question_id);
-    	
-//     	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-    	
-//     		$str="id:".$row['id']."Question:".$row['question']."<button onclick='showOpinions(".$row['id'].");'>Show Opinions</button></br>";
-//     		echo $str;
-    		
-//     	}  	 
-    	 
+    	$result = $userObj->viewPreviousPolls($question_id);    	 
     	echo json_encode($result);
     }
     
@@ -110,9 +102,54 @@ class MainController extends Acontroller{
     public function pollLoad(){
     	$objPollLoad=$this->loadModel("PolledBy");
     	$que=$objPollLoad->selectPoll($_POST['queId']);
-    	print_r($que);
-    	return $que;
+    		return $que;
     }
+    
+    public function pollNow()
+    {
+    	$objPollLoad=$this->loadModel("PolledBy");
+    	$poll=$objPollLoad->chkPoll($_POST['LoginUsername'],$_POST['QuestionId']);
+    	if(count($poll) ==0 )
+    	{
+    		$objPollLoad->makePoll($_POST);
+    	}
+    	else 
+    	{
+    		$objPollLoad->updatePoll($_POST);
+    	}
+    	
+    }
+    public function getOption()
+    {
+    	$objPollLoad=$this->loadModel("PolledBy");
+    	$poll=$objPollLoad->chkPoll($_POST['LoginUsername'],$_POST['QuestionId']);
+    	if(count($poll) ==0 )
+    	{
+    		echo "0";
+    	}
+    	else
+    	{
+    		echo $poll[0]['options_id'];
+    	}
+    }
+    
+    public  function graphData()
+    {
+    	$objPollLoad=$this->loadModel("Question");
+    	$result['options']=$objPollLoad->getOption($_POST['QuestionId']);
+    	$objVoteCount=$this->loadModel("PolledBy");
+    	$count=0;
+    	foreach ($result['options'] as $key => $val)
+    	{
+    		
+    		$result['votes'][$val['id']]=$objVoteCount->getOptCount($val['id']);
+    		$count+=$result['votes'][$val['id']];  		
+    	}
+    	$result['totalVote']=$count;
+    	//print_r($result);
+    	echo json_encode($result);  	
+    } 
+    
     public function insertComment() {
 		//echo "in contr";
 		//print_r($_POST);
@@ -123,6 +160,7 @@ class MainController extends Acontroller{
 		$commentAr=array($userName,$_POST['comment']);
 		echo json_encode($commentAr);
 	}
+	
 	public function getComment() {
 
 

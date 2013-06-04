@@ -116,39 +116,11 @@ function loadAllPoll()
     });
 }
 
-function voteNow($id){
+function voteNow(id){
 
-	$.ajax({
-		async:false,
-		url: "index.php?controller=mainController&method=viewPreviousPolls&question="+$id,
-		type: "post",
-		dataType: "json",
-		success: function(data){
-			$("#pollOpinion").html("");
-			var str = "<table id='pollDispTable'>";
-			str += "<tr id='tableHead'><td>Question</td></tr>";
-			str += "<td>" + data[0]['question'] + "</td>";
-			str += "</table>";
-			$("#pollOpinion").append(str);
-			$.ajax({
-				async:false,
-				url: "index.php?controller=mainController&method=showOpinions&question="+$id,
-				type: "post",
-				dataType: "json",
-				success: function(data){
-					$("#pollOpinion").append("<div>");
-					var strinner = "<table id='pollDispOptionTable'>";					
-					 $.each(data, function(i,value){							
-						 strinner += "<tr><td>" + value + "</td></tr>";												 
-					 });
-					 strinner += "</table>";	
-					 $("#pollOpinion > div").append(strinner);
-					 $("#pollOpinion").append("</div>");
-				}
-			});			
-		}
+	$.post('index.php',{"controller":"mainController","method":"pollLoad","queId":id},function(data){
+		$("#column-right").html(data);
 		});	
-	$("#clickPollOpinion").trigger("click");
 }
 
 function openCreateNewPoll() {
@@ -257,6 +229,19 @@ color: #0A0A2A;
 font-family: 'Tangerine', serif;
 font-size: 12px;
 }
+
+#pollTable td
+{
+	border: 1px solid black;	
+	height:30px;
+	width: auto;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+	 font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
 #pollTable #odd
 {
 background-color : #A9F5BC;
