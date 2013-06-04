@@ -123,11 +123,13 @@ class User extends DBConnection {
 	    return $myResult;
 	    
 	}
-	public function viewPreviousPolls()
+	public function viewPreviousPolls($question_id)
 	{
-		$data['tables'] = 'question';		
+		$data['tables'] = 'question';
+		$data['conditions'] = array(array("id=".$question_id),true);
 		$result = $this->_db->select($data);
-		return $result;
+		$row = $result->fetchAll(PDO::FETCH_ASSOC); 
+		return $row;
 		
 	}
 	
@@ -136,9 +138,9 @@ class User extends DBConnection {
 		$data['tables'] = 'options';
 		$data['conditions'] = array('question_id' => $id);
 		
-		
-		$result = $this->_db->select($data);
-		return $result;
+		$result = $this->_db->select($data);		
+		$row = $result->fetchAll(PDO::FETCH_ASSOC); 
+		return $row;
 		
 	}
 	public function getOption($questionID){

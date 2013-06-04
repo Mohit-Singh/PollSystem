@@ -63,17 +63,18 @@ class MainController extends Acontroller{
     
     public function viewPreviousPolls()
     {
-    	    	 
+        $question_id = $_GET['question']; 
     	$userObj = $this->loadModel('User');
-    	$result = $userObj->viewPreviousPolls();
+    	$result = $userObj->viewPreviousPolls($question_id);
     	
-    	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+//     	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     	
-    		$str="id:".$row['id']."Question:".$row['question']."<button onclick='showOpinions(".$row['id'].");'>Show Opinions</button></br>";
-    		echo $str;
+//     		$str="id:".$row['id']."Question:".$row['question']."<button onclick='showOpinions(".$row['id'].");'>Show Opinions</button></br>";
+//     		echo $str;
     		
-    	}  	 
+//     	}  	 
     	 
+    	echo json_encode($result);
     }
     
     public function loadPreviousPoll()
@@ -83,19 +84,22 @@ class MainController extends Acontroller{
     
     public function showOpinions()
     {
-    	$id=$_POST['questionid'];
+    	$id=$_GET['question'];
     	$userObj = $this->loadModel('User');
     	$result = $userObj->showOpinions($id);
-    	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    	
+    	foreach($result as $key => $value){
     		 
-    		$str[] = "OPTION:".$row['options'];
+    		$str[] = "OPTION:".$value;
     	}
     	$str[] = 	"<img id=\"activityReportIMG\" alt=\"userActivityReport\"
     		        . src=\"index.php?controller=PollGraph&method=createGraph"
     		        ."&question=".$id
     		        ."&raw=".microtime()."\" width=\"220\" height=\"200\">";
+    	
     	echo json_encode($str);
-    	$userObj->getTotalPoll(1);
+    	
+    	//$userObj->getTotalPoll(1);
     }
     
     function userLogOut()
