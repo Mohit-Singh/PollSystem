@@ -1,9 +1,13 @@
 <?php // content="text/plain; charset=utf-8"
 // $Id: groupbarex1.php,v 1.2 2002/07/11 23:27:28 aditus Exp $
+ini_set("display_errors",1);
+
+require_once 'Acontroller.php';
+
 class PollGraph extends Acontroller{
     public function createGraph(){
-        require_once ('../libraries/jpgraph/src/jpgraph.php');
-        require_once ('../libraries/jpgraph/src/jpgraph_bar.php');
+        require_once ('../libraries/jpgraph/jpgraph.php');
+        require_once ('../libraries/jpgraph/jpgraph_bar.php');
         
         $datay1=array(35,160,0,0,0,0);
         $datay2=array(35,190,190,190,190,190);
@@ -52,4 +56,6 @@ class PollGraph extends Acontroller{
         $graph->Stroke();
     }
 }
+$objPoll = new PollGraph();
+$objPoll->createGraph();
 ?>

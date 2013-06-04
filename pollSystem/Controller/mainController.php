@@ -75,7 +75,7 @@ class MainController extends Acontroller{
     	
     	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     	
-    		$str="id:".$row['id']."Question:".$row['text']."<button onclick='showOpinions(".$row['id'].");'>Show Opinions</button></br>";
+    		$str="id:".$row['id']."Question:".$row['question']."<button onclick='showOpinions(".$row['id'].");'>Show Opinions</button></br>";
     		echo $str;
     		
     	}
@@ -98,7 +98,7 @@ class MainController extends Acontroller{
     	$result = $userObj->showOpinions($id);
     	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     		 
-    		$str="OPTION:".$row['text']."</br>";
+    		$str="OPTION:".$row['options']."</br>";
     		echo $str;
     	
     	}

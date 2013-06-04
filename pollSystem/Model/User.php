@@ -111,7 +111,7 @@ class User extends DBConnection {
 	}
 	public function viewPreviousPolls()
 	{
-		$data['columns']=array('text','id');
+		$data['columns']=array('question','id');
 		$data['tables'] = 'question';
 		
 		$result = $this->_db->select($data);
@@ -122,7 +122,7 @@ class User extends DBConnection {
 	public function showOpinions($id)
 	{
 
-		$data['columns']=array('text');
+		$data['columns']=array('options');
 		$data['tables'] = 'options';
 		$data['conditions'] = array('question_id' => $id);
 		
