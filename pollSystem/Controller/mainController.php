@@ -13,43 +13,31 @@ class MainController extends Acontroller{
 	    $userName = $_POST['userName'];
 	    $password = $_POST['password'];
 	
-	    $data['columns'] = array(
-	        'username',
-	        'password',
-	            'id'
-	    );
-	    $data['tables'] = 'login';
-	    $data['conditions'] = array(
-	        array(
-	            'username = "' . $userName . '"'
-	        ),
-	        true
-	    );
+
 	    $userObj = $this->loadModel('User');
-	    $result = $userObj->login($data);
-	    //print_r($result);
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) 
-        {
-            // print_r($row);
-            // print($password);
-            // print(md5($password));
-            if ($row['username'] == $userName) {
-            	//print($password);
-                if ($row['password'] == md5($password)) {
-                   // print(md5($password));
+	    $result = $userObj->login($userName);
+		if(count($result)) {
+            if ($result[0]['username'] == $userName) 
+            {
+                if ($result[0]['password'] == md5($password)) 
+                {
                     $_SESSION['username'] = $userName;
-                    $_SESSION["userId"] = $row['id']; 
+                    $_SESSION['userId'] = $result[0]['id'];
                     $this->loadView('poll');
                 }
                 else 
-              {
-                   echo json_encode("Password does not match");
+             	{
+                   echo "Password does not match";
                 }
             } 
             else 
            {
-               echo json_encode("error : Account Does not exist");
-            }
+               echo "Account Does not exist";
+           }
+        }
+        else
+        {
+        	echo "Account Does not exist";
         }
     }
     
@@ -69,6 +57,14 @@ class MainController extends Acontroller{
     	$obj = $this->loadModel("Question");
     	$obj->insertQuestion();
     }
+    
+    public function loadAllPoll(){
+    	$userObj = $this->loadModel('User');
+    	$result = $userObj->getAllPolls();
+   		echo json_encode($result);
+    } 
+    
+    
     public function viewPreviousPolls()
     {
     	    	 
@@ -80,19 +76,15 @@ class MainController extends Acontroller{
     		$str="id:".$row['id']."Question:".$row['question']."<button onclick='showOpinions(".$row['id'].");'>Show Opinions</button></br>";
     		echo $str;
     		
-    	}
-    	
-//     	 print_r($result);
-//     	 die;
-    	 
+    	}  	 
     	 
     }
+    
     public function loadPreviousPoll()
     {
-    	return $this->loadView('previouspoll');
-    		
-    
+    	return $this->loadView('previouspoll'); 
     }
+    
     public function showOpinions()
     {
     	$id=$_POST['questionid'];
@@ -121,8 +113,5 @@ class MainController extends Acontroller{
     }
     
 }
-
-// $ob=new mainController();
-// $ob->start();
 
 ?>

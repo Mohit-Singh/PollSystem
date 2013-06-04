@@ -211,7 +211,7 @@ class cxpdo extends PDO {
 
 			//If this is an array where the VALUES are the fields
 			if(isset($data[0])) {
-				return implode(',', $this->quoteIdentifier($data));
+				return implode(',', $data);
 					
 				//Else it is an array where the KEYS are the fields
 			} else {

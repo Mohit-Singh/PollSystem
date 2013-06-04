@@ -38,6 +38,7 @@ class Question extends DBConnection {
 
 		$value = array('question_id'=>$id,
 				'options'=>''
+				
 		);
 		
 		foreach ($_POST as $key => $val) {

@@ -105,15 +105,27 @@ class User extends DBConnection {
 		}
 	}
 	
-	public function login($data){
-	    return $this->_db->select($data);
+	public function login($userName){
+
+		$data['tables'] = 'login';
+		$data['conditions'] = array(
+				array(
+						'username = "' . $userName . '"'
+				),
+				true
+		);
+	    $result=$this->_db->select($data);
+	    $myResult=array();
+	    while ($row = $result->fetch(PDO::FETCH_ASSOC))
+	    {
+	    	$myResult[]=$row;
+	    }
+	    return $myResult;
 	    
 	}
 	public function viewPreviousPolls()
 	{
-		$data['columns']=array('question','id');
-		$data['tables'] = 'question';
-		
+		$data['tables'] = 'question';		
 		$result = $this->_db->select($data);
 		return $result;
 		
@@ -121,8 +133,6 @@ class User extends DBConnection {
 	
 	public function showOpinions($id)
 	{
-
-		$data['columns']=array('options');
 		$data['tables'] = 'options';
 		$data['conditions'] = array('question_id' => $id);
 		
@@ -132,11 +142,51 @@ class User extends DBConnection {
 		
 	}
 	public function getOption($questionID){
-	    $data['columns'] =array("poll","text");
+	    $data['columns'] =array("poll","options");
 	    $data['tables'] = 'options';
 	    $data['conditions'] = array(array('question_id = "'.$questionID.'" AND status = "TRUE"'),true);
 	
 	    $result = $this->_db->select($data);
 	    return $result;
 	}	
+	
+	public function getAllPolls()
+	{
+		$data['columns'] =array("question.id",
+				"login.first_name",
+				"login.username",
+				"login.last_name",
+				"question.question",
+				"count(distinct(comment.id)) as comment",
+				"count(distinct(polled_by.login_id)) as votes");
+		$data['tables'] = 'question';
+		
+		$data['joins'][] = array(
+				'table' => 'comment',
+				'type'	=> 'left',
+				'conditions' => array('question.id' => 'comment.question_id')
+		);
+		
+		$data['joins'][] = array(
+				'table' => 'polled_by',
+				'type'	=> 'left',
+				'conditions' => array('question.id' => 'polled_by.question_id')
+		);
+		
+		$data['joins'][] = array(
+				'table' => 'login',
+				'type'	=> 'inner',
+				'conditions' => array('question.login_id' => 'login.id')
+		);
+		$data['group'] = array('question.id');
+		$data['conditions'] = array(array('question.status = "TRUE"'),true);	
+		$result = $this->_db->select($data);
+		
+		$myResult=array();
+		while ($row = $result->fetch(PDO::FETCH_ASSOC))
+		{
+			$myResult[]=$row;
+		}
+		return  $myResult;		
+	}
 }

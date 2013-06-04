@@ -28,7 +28,7 @@ $(document).ready(function(){
 			if(isset($_SESSION["username"]))
 			{
 				
-				echo "$.post('index.php',{'loginStatus':'true'},function(data){ $('#column-left').hide(); $('#column-right').html(data); $('#logOut').show(); });";
+				echo "$.post('index.php',{'loginStatus':'true'},function(data){ $('#column-left').hide(); $('#column-right').html(data); $('#logOut').show();  });";
 			}
 			else 
 			{
@@ -37,6 +37,9 @@ $(document).ready(function(){
 			
 
 	?>
+
+
+	loadAllPoll();
 	
 	$("#divCreateNewPoll").hide();
 	
@@ -63,15 +66,60 @@ $(document).ready(function(){
                 type : 'post',
                 data : "userName="+$("#userName").val()+"&password="+$("#password").val(),                
                 success : function(data){
-                   
-                	$("#column-left").hide(); 
-                	$('#logOut').show();
-                    $("#column-right").html(data);
+                   if(data.trim() != "Account Does not exist" && data.trim() != "Password does not match")
+                   {
+	                	$("#column-left").hide(); 
+	                	$('#logOut').show();
+	                    $("#column-right").prepend(data);
+
+                   }
+                   else
+                   {
+                       alert(data.trim());
+                   }
                 }
         });
         $.fancybox.close();
     });    
 });
+
+function loadAllPoll()
+{
+	$.post('index.php',{"controller":"mainController","method":"loadAllPoll"},function(data){
+
+		//alert(data);
+		var result=jQuery.parseJSON(data);
+		var str="<table id='pollTable'>";
+		str+="<tr id='tableHead'><td>Question</td>"+
+			"<td>User Email Id</td>"+
+			"<td>User Name</td>"+
+			"<td>Comment Count</td>"+
+			"<td>Votes Count</td><td>Vote Now</td></tr>";
+		var count=0;
+		$.each(result, function(key,val){
+				if(count%2==0)
+				{
+					str +="<tr id='odd'>";
+				}
+				else
+				{
+					str+="<tr id='even'>";
+				}
+				str +="<td>"+val['question']+"</td>"+
+				"<td>"+val['username']+"</td>"+
+				"<td>"+val['first_name']+" "+val['last_name']+"</td>"+
+				"<td>"+val['comment']+"</td>"+
+				"<td>"+val['votes']+"</td>"+
+				"<td><input type='button' value='Vote Now' onclick='voteNow(\""+val['id']+"\")'>"+
+				"</tr>";
+				count++;
+								
+			});
+		str+="</table>";
+		$("#column-right").append(str);
+		
+	});
+}
 
 function openCreateNewPoll()
 {
@@ -125,7 +173,9 @@ function AddQuestion() {
         data : $("#submitForm").serialize(),                
         success : function(data){
             alert("Succesfully saved");
-            $("#column-right").load("./View/poll.php");
+            location.reload();
+            //$("#column-right").load("./View/poll.php");
+            //loadAllPoll();
         }
 });
 }
@@ -153,7 +203,7 @@ function viewPreviousPolls()
             $("#box1").html('');
             $("#box1").append(data);
         }
-});
+		});
 
 	
 	 $.ajax({
@@ -166,7 +216,7 @@ function viewPreviousPolls()
              $("#previousPollDiv").html('');
              $("#previousPollDiv").append(data);
          }
- });
+ 	});
 }
 
 
@@ -178,6 +228,33 @@ function viewPreviousPolls()
 	float: right;
 	margin-right: 50px;
 }
+#pollTable
+{
+	margin-left: 25px;
+	text-align: center;
+	color: #0A0A2A;
+	font-family: 'Tangerine', serif;
+  font-size: 12px;
+}
+#pollTable #odd
+{
+	background-color : #A9F5BC;
+	color:#0A0A2A;
+	
+}
+#pollTable #even
+{
+	background-color : #F5F6CE;
+	color:#0A0A2A;
+	
+}
+#pollTable #tableHead
+{
+	background-color : #2EFEF7;
+	color:#0A0A2A;
+	
+}
+
 </style>
 
 </head>
@@ -192,13 +269,14 @@ function viewPreviousPolls()
          
        <p><a id="register" href="#registerDiv">REGISTER</a></p>
        <p><a id="login" href="#loginDiv">LOGIN</a></p>
-       <p><a id="viewPolling" href="#" onclick="viewPreviousPolls();">VIEW POLLINGS</a></p>
+       
+       <!--  <p><a id="viewPolling" href="#" onclick="viewPreviousPolls();">VIEW POLLINGS</a></p>-->
 
 		<div class="hidden">
 			<div id="loginDiv">
 				<h2>LOGIN</h2>
 				<label>USERNAME:</label> <input type="text" id="userName"
-					name="userName" /></br> <label>PASSWORD:</label> <input type="text"
+					name="userName" /></br> <label>PASSWORD:</label> <input type="password"
 					id="password" name="password" /></br> <input type="button"
 					id="signIn" name="signIn" value="LOGIN" />
 			</div>
@@ -218,7 +296,7 @@ function viewPreviousPolls()
 					</tr>
 					<tr>
 						<td><label>PASSWORD:</label></td>
-						<td><input type="text" name="password" id="registerPassword" /></br></td>
+						<td><input type="password" name="password" id="registerPassword" /></br></td>
 					</tr>
 					<tr>
 						<td><label>EMAIL:</label></td>

@@ -37,6 +37,10 @@ if (isset ( $_REQUEST ['controller'] )) {
 				{
 					$object->loadView("dopoll",$Question);
 				}
+				if($_REQUEST ["method"]=='loadView')
+				{
+					$object->loadView("main");
+				}
 				
 			}
 
