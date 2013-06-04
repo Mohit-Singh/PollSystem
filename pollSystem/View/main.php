@@ -238,15 +238,21 @@ color:#0A0A2A;
 background-color : #2EFEF7;
 color:#0A0A2A;
 }
-
+#header
+{
+	border:2px solid black;
+}
 </style>
 
 </head>
 <body>
-<div id="header">gfgfgfg</div>
+<div id="header">
+      <h1>WELCOME TO POLLING SYSTEM</a></h1>
+
+</div>
 <div id="logOut"><a href="#" onclick="logOutUser();">LogOut</a></div>
 <div id="wrapper">
-<div class="content">
+
 <div id = "column-left" class="column-left">
 <h3>LOGIN/REGISTER</h3>
 <p><a id="register" href="#registerDiv">REGISTER</a></p>
@@ -298,7 +304,7 @@ onclick="register()" /></td>
 <div id="box1" class="box"></div>
 </div>
 
-</div>
+
 </div>
 </div>
 <div align=center>
