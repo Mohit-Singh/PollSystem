@@ -48,8 +48,6 @@
                     padding:        10px;
                 }
         </style>
-<!-- <script src='./assets/js/jquery-1.9.1.min.js'></script> -->
-<!-- <script src='./assets/js/jquery.tools.min.js'></script> -->
 <script type="text/javascript" src="./View/js/jquery.accordion.2.0.js" charset="utf-8"></script>
 
 <script type="text/javascript">
@@ -131,7 +129,10 @@ showComments();
 <body>
 <form id="commentform">
 <textarea id = "postCommentText" name="comment"></textarea>
-<input type="button" onClick='postComment()' value="post comment"/>
+ <?php	if(isset($_SESSION['userId']))
+	{?>
+		<input type="button" onClick='postComment()' value="post comment"/>
+	<?php } ?>
 <div  style="border:1px solid black" id="comments"></div>
 </form>
 </body>

@@ -10,15 +10,17 @@
 	<td>Question: <?php  echo $data[0]['question'];?></td>
 </tr>
 <?php $count=1; foreach ($data as $key =>$val){?>
-	<tr><td><input name="options" type="radio" id="optid<?php echo $val['optId']?>"onclick="vote(<?php echo $val['optId']?>)" <?php 
+	<tr><td>
+	<?php 
 	
-	if(!isset($_SESSION['userId']))
+	if(isset($_SESSION['userId']))
 	{
-		echo "disabled=true";
-	}
+		?>
 		
-	
-	?>>Option<?php echo $count; ?>: <?php echo $val['options']?></td></tr>
+		<input name="options" type="radio" class="allOptions" id="optid<?php echo $val['optId']?>"onclick="vote(<?php echo $val['optId']?>)">
+		<?php 
+	}
+	?>Option<?php echo $count; ?>: <?php echo $val['options']?></td></tr>
 	<?php }?>
 </table>
  <canvas id="cvs" width="350" height="300">[No canvas support]</canvas>
@@ -55,6 +57,7 @@ $.post('index.php',{"controller":"mainController",
 				if(data.trim() !=0)
 				{
 					$("#optid"+data).attr("checked",true);
+					$(".allOption").remove();
 				}
 	});
 
