@@ -46,14 +46,6 @@ $("#dopoll").click(function() {
 				<input type="button" name="addMoreOptions" value="Add More Options"
 					onclick="addMoreOptions();" />
 			</div>
-			<div id="question">
-			<form id="QuestionForm">
-				
-				<input type="text" name="queId">
-				<input type="button" name="dopoll" id="dopoll" value="dopoll" />	
-			</form>
-			</div>
-			
 		</div>
 	</div>
 </div>
