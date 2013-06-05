@@ -12,7 +12,7 @@
 html { height: 100%; font-size: 62.5% }
 
 body {
-height: 100%;
+/*height: 100%;*/
 background-color: #E5DEAF;
 text-align: center;
 font: 1.4em Verdana, Arial, Helvetica, sans-serif;
@@ -129,7 +129,7 @@ letter-spacing: 1px;
 }
 .column-right {
 margin: 0 0 0 191px;
-	width: 650px;
+	width: 800px;
 	font: 1.6em Verdana, Arial, Helvetica, sans-serif;
 	
 }

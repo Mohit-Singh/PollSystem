@@ -11,7 +11,7 @@ media="print" />
 <style>
 </style>
 <script src="./assets/js/jquery-1.9.1.min.js"></script>
-
+<script src="./assets/js/jquery.tools.min.js"></script>
 
 <script src="./assets/js/fancybox/jquery.fancybox.js"></script>
 <link rel="stylesheet" href="./assets/js/fancybox/jquery.fancybox.css"

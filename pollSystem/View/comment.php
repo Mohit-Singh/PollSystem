@@ -53,7 +53,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	$('#comments').hide();
+// 	$('#comments').hide();
 	
     
 	$("#comments").ready(function(){
@@ -63,7 +63,7 @@ $(document).ready(function() {
 //             canToggle: true,
 //             canOpenMultiple: true
 //         });
-        $(".loading").removeClass("loading");
+//         $(".loading").removeClass("loading");
 });
 function showAccordian(){
 	$(".accordion").accordion();
