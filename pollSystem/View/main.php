@@ -56,11 +56,20 @@ $("#register").fancybox({
 // 'type' : 'iframe'
 });
 
+$("#userName").keyup(function(ev) {
+	   // 13 is ENTER
+	   if (ev.which === 13 ) {
+		   $("#signIn").trigger("click");
+	   }
+	}); 
+$("#password").keyup(function(ev) {
+	   // 13 is ENTER
+	   if (ev.which === 13 ) {
+		   $("#signIn").trigger("click");
+	   }
+	}); 
 
 $("#clickPollOpinion").fancybox({
-	afterOpen: function(){
-		$("#signIn").focus();
-	},
 	afterClose : function(){
 		$("#pollOpinion").html("");
 		return;
