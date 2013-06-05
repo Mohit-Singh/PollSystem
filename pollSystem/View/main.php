@@ -58,6 +58,9 @@ $("#register").fancybox({
 
 
 $("#clickPollOpinion").fancybox({
+	afterOpen: function(){
+		$("#signIn").focus();
+	},
 	afterClose : function(){
 		$("#pollOpinion").html("");
 		return;

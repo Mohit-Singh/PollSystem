@@ -57,7 +57,7 @@ function vote(optId)
 				"LoginUsername":<?php if(isset($_SESSION['userId'])){echo $_SESSION['userId'];}else{echo "0";}?>},function(data){
 					alert("Thanks for Your Vote");
 					$.post('index.php',{"controller":"mainController","method":"pollLoad","queId":<?php echo $data[0]['qId']?>},function(data){
-						$("#column-right").html(data);
+						$("#hiddenElemtnt").html(data);
 						});
 		});	
 	
