@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="./assets/css/demos.css" type="text/css" media="screen" />
 
 <a href="#" onclick="home()">Home</a>
+<a href="#graph1" id = "graph1Click">Graph 1</a>
+<a href="#graph2" id = "graph2Click">Graph 2</a>
 <table>
 <tr>
 	<td>Question: <?php  echo $data[0]['question'];?></td>
@@ -23,14 +25,18 @@
 	?>Option<?php echo $count; ?>: <?php echo $val['options']?></td></tr>
 	<?php }?>
 </table>
+<div id = "graph1" style = "float:left">
  <canvas id="cvs" width="350" height="300">[No canvas support]</canvas>
+</div>
+<div id = "graph2" style = "float:left">
   <canvas id="cvs2" width="350" height="300">[No canvas support]</canvas>
-  
+</div>
 <div id="questionComments">
 	<?php include './View/comment.php';?>
 </div>
 
 <script>
+graph1Click
 function home()
 {
 	location.reload();
@@ -57,7 +63,8 @@ $.post('index.php',{"controller":"mainController",
 				if(data.trim() !=0)
 				{
 					$("#optid"+data).attr("checked",true);
-					$(".allOption").remove();
+				    $("[type ~='radio']").remove();
+					//$(".allOption").remove();
 				}
 	});
 
