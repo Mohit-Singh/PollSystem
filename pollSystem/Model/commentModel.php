@@ -3,11 +3,11 @@
 class commentModel extends DBConnection {
 	private $_userid;
 	
-	public function addComment($userName,$comment) {
+	public function addComment($userName,$comment,$qId) {
 		//echo ("in model");
 		$_userid=$userName;
 		$userName="1";
-		$data = array('question_id'=>'1','comment'=>$comment,'login_id'=>$userName,'date_time'=>date('Y-m-d h:i:s', time()),'status'=>'TRUE');
+		$data = array('question_id'=>$qId,'comment'=>$comment,'login_id'=>$_SESSION['userId'],'date_time'=>date('Y-m-d h:i:s', time()),'status'=>'TRUE');
 		//$result = $this->_db->select($data);
 		$this->_db->insert("comment",$data);
 		

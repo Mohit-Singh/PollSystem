@@ -115,7 +115,7 @@ class MainController extends Acontroller{
 		//$userName=$_SESSION['username'];
 		$userName="abc";
 		$ob=$this->loadModel("commentModel");
-		$ob->addComment($userName,$_POST['comment']);
+		$ob->addComment($userName,$_POST['comment'],$_GET['questionId']);
 		$commentAr=array($userName,$_POST['comment']);
 		echo json_encode($commentAr);
 	}
@@ -123,7 +123,7 @@ class MainController extends Acontroller{
 
 
 		$ob=$this->loadModel("commentModel");
-		$ob->getComments("1");
+		$ob->getComments($_GET['questionId']);
 
 	}
 }

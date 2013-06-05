@@ -1,10 +1,8 @@
-<?php
-$uid=$_SESSION['userid'];
-?>
+
 <head>
-<link rel="stylesheet" href="css/reset.css" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="css/core.css" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="css/accordion.core.css" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="./View/css/reset.css" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="./View/css/core.css" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="./View/css/accordion.core.css" type="text/css" charset="utf-8">
         <style type="text/css">
             .loading {
                 display: none;
@@ -50,26 +48,41 @@ $uid=$_SESSION['userid'];
                     padding:        10px;
                 }
         </style>
-<script
-src='../assets/js/jquery.tools.min.js'></script>
-<script
-src='../assets/js/jquery-1.9.1.min.js'></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<!-- <script src='./assets/js/jquery-1.9.1.min.js'></script> -->
+<!-- <script src='./assets/js/jquery.tools.min.js'></script> -->
+<script type="text/javascript" src="./View/js/jquery.accordion.2.0.js" charset="utf-8"></script>
+
 <script type="text/javascript">
 
 $(document).ready(function() {
 	$('#comments').hide();
+	
+    
+	$("#comments").ready(function(){
+		showComments();
+		});
+//         $('#example4').accordion({
+//             canToggle: true,
+//             canOpenMultiple: true
+//         });
+        $(".loading").removeClass("loading");
+});
+function showAccordian(){
+	$(".accordion").accordion();
+}
+function showComments(){
+	$("#comments").html("");
 	$.ajax({
 		type: "POST",
-	    url: '../index.php?controller=MainController&method=getComment',  
+	    url: './index.php?controller=MainController&method=getComment&questionId=<?php echo $data[0]['qId']?>',  
 	     
 	       success: function(data){
 				
 		       data=jQuery.parseJSON(data);
 			$.each(data,function(i,value){
 				if(i==0) {
-				  $('#comments').append("<ul id='example4' class='accordion'>"); }
-				  $('#comments').append("<li><h3>posted by  "+value['login_id']+" on "+value['date_time']+"<div[class='panel loading']>   "+value['comment']+"</div></li>");
+				  $('#comments').prepend("<ul id='example4' class='accordion'>"); }
+				  $('#example4').prepend("<li><h3>posted by  "+value['login_id']+" on "+value['date_time']+"</h3><div class=\"panel\">   "+value['comment']+"</div></li>");
 				 //  $("#comments").append(" posted by ");
 				   
 				// $("#comments").append("on ");
@@ -85,43 +98,40 @@ $(document).ready(function() {
 			
 			
 			$("#comments").show();
+			showAccordian();
 	     }
 	  });
-	
-});
+	$("#postCommentText").val("");
+}
 function postComment()
 {
 	
 $.ajax({
 		type: "POST",
-	    url: '../index.php?controller=MainController&method=insertComment',  
+	    url: './index.php?controller=MainController&method=insertComment&questionId=<?php echo $data[0]['qId']?>',  
 	     data: $('#commentform').serialize(),
 	       success: function(data){
 			obj = jQuery.parseJSON(data);
+			alert("post has bn made");
 			 //$("#comments").append("---------------------------------");
-	    	 $("#comments").append(obj[1]);
-	    	 $("#comments").append(" posted by ");
-	    	 $("#comments").append(obj[0]);
-	    	 $("#comments").append("</br>");
-			 $("#comments").append("---------------------</br>");
+// 			 $('#comments').prepend("<ul id='example4' class='accordion'>");
+// 			 $('#example4').prepend("<li><h3>posted by  "+obj[0]+"</h3><div class=\"panel\">"+obj[1]+"</div></li>");
+// 			 showAccordian();
+			 // 	    	 $("#comments").prepend(obj[1]);
+// 	    	 $("#comments").prepend(" posted by ");
+// 	    	 $("#comments").prepend(obj[0]);
+// 	    	 $("#comments").prepend("</br>");
+// 			 $("#comments").prepend("---------------------</br>");
 	     }
 	  });
+showComments();
 } 
 </script>
 </head>
 <body>
 <form id="commentform">
-<textarea name="comment"></textarea>
-<input type="button" onClick='postComment()'/>
+<textarea id = "postCommentText" name="comment"></textarea>
+<input type="button" onClick='postComment()' value="post comment"/>
 <div  style="border:1px solid black" id="comments"></div>
 </form>
 </body>
- <script type="text/javascript" src="js/jquery-1.4.2.min.js" charset="utf-8"></script>
-        <script type="text/javascript" src="js/jquery.accordion.2.0.js" charset="utf-8"></script>
-        <script type="text/javascript">
-            $('#example4').accordion({
-                canToggle: true,
-                canOpenMultiple: true
-            });
-            $(".loading").removeClass("loading");
-        </script>	

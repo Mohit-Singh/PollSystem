@@ -158,6 +158,7 @@ class MainController extends Acontroller{
 		$ob=$this->loadModel("commentModel");
 		$ob->addComment($userName,$_POST['comment']);
 		$commentAr=array($userName,$_POST['comment']);
+		//rsort($commentAr);
 		echo json_encode($commentAr);
 	}
 	

@@ -23,6 +23,11 @@
 </table>
  <canvas id="cvs" width="350" height="300">[No canvas support]</canvas>
   <canvas id="cvs2" width="350" height="300">[No canvas support]</canvas>
+  
+<div id="questionComments">
+	<?php include './View/comment.php';?>
+</div>
+
 <script>
 function home()
 {
@@ -104,4 +109,5 @@ $.post('index.php',{"controller":"mainController",
 
    		RGraph.Effects.HBar.Grow(hbar);
 	}
+
 </script>
