@@ -61,11 +61,17 @@ $("#clickPollOpinion").fancybox({
 	afterClose : function(){
 		$("#pollOpinion").html("");
 		return;
-	}	
-});
+	}
 
+});
+$("#CreateNewPollClick").fancybox({
+	 'width' : 500,
+	 'height' : 200,	 
+	 'autoSize' : false,
+});	
 
 $("#signIn").click(function(){
+	
 $.ajax({
 url : './index.php?controller=mainController&method=login',
 type : 'post',
@@ -107,7 +113,7 @@ function loadAllPoll()
         	str += "<td>" + val['question'] + "</td>" + "<td>" + val['username'] + "</td>"
         			+ "<td>" + val['first_name'] + " " + val['last_name'] + "</td>"
         			+ "<td>" + val['comment'] + "</td>" + "<td>" + val['votes'] + "</td>"
-        			+ "<td><input type='button' value='Vote Now' onclick='voteNow(\""
+        			+ "<td><input type='button' value='View Details' onclick='voteNow(\""
         			+ val['id'] + "\")'>" + "</tr>";
         	count++;
         });
@@ -119,7 +125,7 @@ function loadAllPoll()
 function voteNow(id){
 
 	$.post('index.php',{"controller":"mainController","method":"pollLoad","queId":id},function(data){
-		$("#column-right").html(data);
+		$("#hiddenElemtnt").html(data);
 		});	
 }
 
@@ -326,6 +332,8 @@ onclick="register()" /></td>
 
 
 </div>
+
+<div id="hiddenElemtnt" ></div>
 
 <div align=center>
 OSSCUBE<a href='http://www.osscube.com'> OSSCUBE.COM</a>

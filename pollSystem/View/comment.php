@@ -9,7 +9,7 @@
             }
             .accordion {
                 border: 1px solid #ccc;
-                width:  50%;
+             /*   width:  50%;*/ 
             }
                 .accordion li h3 a {
                     background:             #666;
@@ -128,9 +128,9 @@ showComments();
 </head>
 <body>
 <form id="commentform">
-<textarea id = "postCommentText" name="comment"></textarea>
  <?php	if(isset($_SESSION['userId']))
 	{?>
+<textarea id = "postCommentText" name="comment"></textarea>
 		<input type="button" onClick='postComment()' value="post comment"/>
 	<?php } ?>
 <div  style="border:1px solid black" id="comments"></div>

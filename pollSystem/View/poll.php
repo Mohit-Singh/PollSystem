@@ -1,5 +1,3 @@
-
-
 <script type="text/javascript">
 $("#dopoll").click(function() {
 
@@ -20,10 +18,10 @@ $("#dopoll").click(function() {
 	<div id="divMainPageContainer">
 
 		<div id="divMainPageCenter">
-
-			<input type="button" name="createNewPoll" value="createNewPoll"
-				onclick="openCreateNewPoll();" />
-			<div id="divCreateNewPoll">
+		
+		<a href = "#divCreateNewPoll" id = "CreateNewPollClick">
+			<input type="button" name="createNewPoll" value="createNewPoll"/>
+			<div id="divCreateNewPoll" style = "display:none">
 				<form id="submitForm">
 					<table id="addMoreOptionsTable">
 						<tr>
@@ -39,12 +37,15 @@ $("#dopoll").click(function() {
 							<td><input name="opt2" type="text" /></td>
 						</tr>
 					</table>
+					
 					<input type="button" value="Submit" onclick="AddQuestion();"></input>
-
+                    
 				</form>
-				<div id="addMoreOptions"></div>
-				<input type="button" name="addMoreOptions" value="Add More Options"
+					<input type="button" name="addMoreOptions" value="Add More Options"
 					onclick="addMoreOptions();" />
+							<div id="addMoreOptionsDiv"></div>
+
+	
 			</div>
 		</div>
 	</div>

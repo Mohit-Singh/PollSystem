@@ -4,10 +4,11 @@
       <script src="./assets/js/RGraph.hbar.js" ></script>
     <link rel="stylesheet" href="./assets/css/demos.css" type="text/css" media="screen" />
 
-<a href="#" onclick="home()">Home</a>
+<h2>Poll</h2>
 <a href="#graph1" id = "graph1Click">Graph 1</a>
 <a href="#graph2" id = "graph2Click">Graph 2</a>
-<table>
+<a href="#questionComments" id = "questionCommentsClick">Comments</a>
+<table id = "tableDiv" style = "margin : auto; padding-bottom : 10px;">
 <tr>
 	<td>Question: <?php  echo $data[0]['question'];?></td>
 </tr>
@@ -25,18 +26,24 @@
 	?>Option<?php echo $count; ?>: <?php echo $val['options']?></td></tr>
 	<?php }?>
 </table>
-<div id = "graph1" style = "float:left">
+<div id = "graph1" style="display:none">
  <canvas id="cvs" width="350" height="300">[No canvas support]</canvas>
 </div>
-<div id = "graph2" style = "float:left">
+<div id = "graph2" style="display:none">
   <canvas id="cvs2" width="350" height="300">[No canvas support]</canvas>
 </div>
-<div id="questionComments">
+<div id="questionComments" style="display:none">
 	<?php include './View/comment.php';?>
 </div>
 
 <script>
-graph1Click
+$("#graph2Click").fancybox();
+$("#graph1Click").fancybox();
+$("#questionCommentsClick").fancybox({
+'min-width' : 300,
+'autoSize' : false
+	
+});
 function home()
 {
 	location.reload();
