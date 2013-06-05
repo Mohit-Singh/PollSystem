@@ -113,8 +113,12 @@ class MainController extends Acontroller{
 		//echo "in contr";
 		//print_r($_POST);
 		//$userName=$_SESSION['username'];
+    	if(!$_POST['comment']) {
+    		echo("comment can't b blank");die;
+    	}
 		$userName="abc";
 		$ob=$this->loadModel("commentModel");
+		$_POST['comment']=htmlentities($_POST['comment']);
 		$ob->addComment($userName,$_POST['comment'],$_GET['questionId']);
 		$commentAr=array($userName,$_POST['comment']);
 		echo json_encode($commentAr);

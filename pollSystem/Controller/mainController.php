@@ -154,8 +154,12 @@ class MainController extends Acontroller{
 		//echo "in contr";
 		//print_r($_POST);
 		//$userName=$_SESSION['username'];
+		if(!$_POST['comment']) {
+			echo("comment can't b blank");
+		}
 		$userName="abc";
 		$ob=$this->loadModel("commentModel");
+		$_POST['comment']=htmlentities($_POST['comment']);
 		$ob->addComment($userName,$_POST['comment']);
 		$commentAr=array($userName,$_POST['comment']);
 		//rsort($commentAr);

@@ -3,7 +3,7 @@
     <script src="./assets/js/RGraph.pie.js" ></script>
       <script src="./assets/js/RGraph.hbar.js" ></script>
     <link rel="stylesheet" href="./assets/css/demos.css" type="text/css" media="screen" />
-
+<div id="questionDiv">
 <h2>Poll</h2>
 <a href="#graph1" id = "graph1Click">Graph 1</a>
 <a href="#graph2" id = "graph2Click">Graph 2</a>
