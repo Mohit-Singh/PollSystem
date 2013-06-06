@@ -193,18 +193,31 @@ h1 small {
 	text-decoration:underline;
 }
 .left {
-	float:left;
-	height:auto;
-	width:auto;
-	margin:0;
-	padding:0 25px;
-	background:url(images/l_bg.gif) top center no-repeat;
+/* 	float:left; */
+/* 	height:auto; */
+/* 	width:auto; */
+/* 	margin:0; */
+/* 	/*padding:0 25px;*/ */
+/* 	background:url(images/l_bg.gif) top center no-repeat; */
+/*  width: 660px; */
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #DEDEDE;
+/*     background-image: url("images/l_bg.gif"); */
+    background-origin: padding-box;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 700px auto;
+    float: left;
+    height: auto;
+    margin: 0;
+    width: 700px;
 }
 .right {
 	float:right;
 	width:210px;
 	margin:0;
-	padding:0 25px;
+	/*padding:0 25px;*/
 	background:url(images/r_bg.gif) top center no-repeat;
 }
 .right ul {

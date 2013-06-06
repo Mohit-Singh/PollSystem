@@ -15,11 +15,18 @@ $(document).ready(function(){
 <?php
 if(isset($_SESSION["username"]))
 {
-
+?>
+$username = "<?php echo $_SESSION["username"]; ?>";
+$login = "yes";
+<?php 
 echo "$.post('index.php',{'loginStatus':'true'},function(data){ $('#column-left').hide(); $('#column-right').html(data); $('#logOut').show(); });";
 }
 else
 {
+?>
+$username = "<?php echo ""; ?>";
+$login = "no";
+<?php 
 echo "$('#logOut').hide();";
 }
 
@@ -74,7 +81,7 @@ $("#CreateNewPollClick").fancybox({
 });	
 
 $("#signIn").click(function(){
-	
+
 $.ajax({
 url : './index.php?controller=mainController&method=login',
 type : 'post',
@@ -82,10 +89,12 @@ data : "userName="+$("#userName").val()+"&password="+$("#password").val(),
 success : function(data){
 if(data.trim() != "Account Does not exist" && data.trim() != "Password does not match")
 {
-$("#column-left").hide();
+$("#divRight").hide();
 $('#logOut').show();
-$("#column-right").prepend(data);
-
+$("#column-right").html("");
+$username = $("#userName").val();
+$login = "yes";
+loadAllPoll();
 }
 else
 {
@@ -98,14 +107,18 @@ $.fancybox.close();
 });
 
 function loadAllPoll()
-{
+{	
     $.post('index.php',{"controller":"mainController","method":"loadAllPoll"},function(data){    
     //alert(data);
     	var result = jQuery.parseJSON(data);
     	var str = "<table id='pollTable'>";
     	str += "<tr id='tableHead'><td>Question</td>" + "<td>User Email Id</td>"
     			+ "<td>User Name</td>" + "<td>Comment Count</td>"
-    			+ "<td>Votes Count</td><td>Vote Now</td></tr>";
+    			+ "<td>Votes Count</td><td>Vote Now</td>";
+		if($login == "yes"){
+			str += "<td>Delete Poll</td>";
+		}
+    	str += "</tr>";
         var count=0;
         $.each(result, function(key,val){
         	if (count % 2 == 0) {
@@ -117,12 +130,22 @@ function loadAllPoll()
         			+ "<td>" + val['first_name'] + " " + val['last_name'] + "</td>"
         			+ "<td>" + val['comment'] + "</td>" + "<td>" + val['votes'] + "</td>"
         			+ "<td><input type='button' value='View Details' onclick='voteNow(\""
-        			+ val['id'] + "\")'>" + "</tr>";
+        			+ val['id'] + "\")'>";
+        	if($username == val['username'] && $login == "yes"){
+        		str += "<td><input type='button' value='Delete' onclick='DeletePoll(\""
+        			+ val['id'] + "\")'></td>";
+        	}
+        	else{
+            	if($login == "yes"){
+            	    str += "<td>No</td>";
+            	}
+        	}
+        	str += "</tr>";
         	count++;
         });
         str+="</table>";
         $("#column-right").append(str);
-    });
+    });    
 }
 
 function voteNow(id){
@@ -173,6 +196,24 @@ function register() {
 	});
 }
 
+function DeletePoll($id){
+	$.ajax({
+		url : './index.php?controller=mainController&method=delPoll',
+		type : 'post',
+		data : "QuestionId="+$id,
+		success : function(data) {
+			alert("Succesfully deleted");
+			$("#hiddenElemtnt").html("");
+			$("#pollTable").remove();
+			loadAllPoll();
+			
+			//location.reload();
+			// $("#column-right").load("./View/poll.php");
+			// loadAllPoll();
+		}
+	});	
+}
+
 function AddQuestion() {
 	$.ajax({
 		url : './index.php?controller=mainController&method=AddQuestion',
@@ -195,6 +236,7 @@ function logOutUser() {
 			location.reload();
 		}
 	});
+	$login = "no";
 }
 
 function viewPreviousPolls() {
@@ -233,7 +275,7 @@ margin-right: 50px;
 }
 #pollTable
 {
-margin-left: 25px;
+/*margin-left: 25px;*/
 text-align: center;
 color: #0A0A2A;
 font-family: 'Tangerine', serif;
@@ -250,7 +292,7 @@ font-size: 12px;
     text-overflow: ellipsis;
     white-space: nowrap;
 	 font-family:Verdana, Arial, Helvetica, sans-serif;
-    font-size: 14px;
+    font-size: 11px;
 }
 
 #pollTable #odd
@@ -372,7 +414,11 @@ onclick="register()" /></td>
 </div>
 <div id="hiddenElemtnt" ></div>
       </div>
-      <div class="right">
+<?php
+if(!isset($_SESSION["username"]))
+{
+?>      
+      <div id = "divRight" class="right">
         <h2>Menu</h2>
         <ul>
           <li>
@@ -380,22 +426,11 @@ onclick="register()" /></td>
 <li><p><a id="login" href="#loginDiv"><blink>LOGIN</blink></a></p></li>
           
         </ul>
-        <h2>Sponsors</h2>
-        <ul class="sponsors">
-          <li class="sponsors"><a href="http://www.dreamtemplate.com">DreamTemplate</a><br />
-            Over 6,000+ Premium Web Templates</li>
-          <li class="sponsors"><a href="http://www.templatesold.com/">TemplateSOLD</a><br />
-            Premium WordPress &amp; Joomla Themes</li>
-          <li class="sponsors"><a href="http://www.imhosted.com">ImHosted.com</a><br />
-            Affordable Web Hosting Provider</li>
-          <li class="sponsors"><a href="http://www.csshub.com/">CSS Hub</a><br />
-            Premium CSS Templates</li>
-          <li class="sponsors"><a href="http://www.evrsoft.com">Evrsoft</a><br />
-            Website Builder Software &amp; Tools</li>
-          <li class="sponsors"><a href="http://www.myvectorstore.com">MyVectorStore</a><br />
-            Royalty Free Stock Icons</li>
-        </ul>
       </div>
+<?php 
+}
+?>      
+      
       <div class="clr"></div>
     </div>
   </div>

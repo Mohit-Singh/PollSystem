@@ -62,5 +62,11 @@ class Question extends DBConnection {
 		}
 		return  $myResult;
 	}
+	public function delPoll($questionID){
+	    $field=array();
+	    $field['status']="FALSE";	    
+	    $where = array('id' => $questionID);	    
+	    $result=$this->_db->update('question',$field,$where);
+	}
 
 }

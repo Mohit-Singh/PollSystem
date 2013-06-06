@@ -175,6 +175,10 @@ class MainController extends Acontroller{
 		$ob->getComments("1");
 
 	}
+	public function delPoll(){
+	    $objPoll =$this->loadModel("Question");
+	    $objPoll->delPoll($_POST['QuestionId']);	    
+	}
 }
 
 ?>

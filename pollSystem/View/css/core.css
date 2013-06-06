@@ -2,8 +2,8 @@ h1, h2, h3, h4 {
     color:      #333;
 }
 h1 {
-    font-size:  32px;
-    margin:     0 0 20px;
+    font-size:  40px;
+/*     margin:     0 0 10px; */
 }
 h2 {
     border-bottom:  1px solid #ccc;
@@ -34,7 +34,7 @@ ul {
 }
 
 li {
-    list-style-type:    disc;
+    /*list-style-type:    disc;*/
     margin-left:        1em;
 }
 
