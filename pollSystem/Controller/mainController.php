@@ -100,9 +100,11 @@ class MainController extends Acontroller{
     }
     
     public function pollLoad(){
+    	
     	$objPollLoad=$this->loadModel("PolledBy");
     	$que=$objPollLoad->selectPoll($_POST['queId']);
-    		return $que;
+    	
+    	    		return $que;
     }
     
     public function pollNow()

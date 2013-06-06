@@ -14,13 +14,14 @@ $("#dopoll").click(function() {
 });
 </script>
 <div class="box-in">
-	<h2>Welcome to Polling System</h2>
+	
 	<div id="divMainPageContainer">
 
 		<div id="divMainPageCenter">
 		
 		<a href = "#divCreateNewPoll" id = "CreateNewPollClick">
-			<input type="button" name="createNewPoll" value="createNewPoll"/>
+		
+			<input type="button" name="createNewPoll" value="createNewPoll"/><hr />
 			<div id="divCreateNewPoll" style = "display:none">
 				<form id="submitForm">
 					<table id="addMoreOptionsTable">

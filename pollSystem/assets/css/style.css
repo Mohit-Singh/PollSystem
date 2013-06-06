@@ -194,15 +194,14 @@ h1 small {
 }
 .left {
 	float:left;
-	height:auto;
-	width:auto;
+	width:614px;
 	margin:0;
 	padding:0 25px;
 	background:url(images/l_bg.gif) top center no-repeat;
 }
 .right {
 	float:right;
-	width:210px;
+	width:255px;
 	margin:0;
 	padding:0 25px;
 	background:url(images/r_bg.gif) top center no-repeat;

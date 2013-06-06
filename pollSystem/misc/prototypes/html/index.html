@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Polling System</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection, tv" />
+<link rel="stylesheet" href="css/style-print.css" type="text/css" media="print" />
+
+
+<script src="./jquery1/jquery.erasing-1.3.4.js"></script>
+<script src="./jquery1/jquery.js"></script>
+<script src="./jquery1/jquery.erasing-1.3.pack.js"></script>
+<script src="./jquery1/jquery.fancybox-1.3.4.pack.js"></script>
+<script src="./jquery1/jquery.mousewheel-3.0.4.pack.js"></script>
+<link rel="stylesheet" href="./jquery1/jquery.fancybox-1.3.4.css" type="text/css" media="screen">
+
+
+<script>
+$(document).ready(function(){
+
+	
+	$("#divCreateNewPoll").hide();
+	
+	$("#login").fancybox({
+        // 'width'            : screenW/2,
+        // 'height'        : screenH-210,
+        // 'autoScale'        : false,
+        // 'transitionIn'        : 'none',
+        // 'transitionOut'        : 'none',
+        // 'type'            : 'iframe'
+     });
+
+	$("#register").fancybox({
+        // 'width'            : screenW/2,
+        // 'height'        : screenH-210,
+        // 'autoScale'        : false,
+        // 'transitionIn'        : 'none',
+        // 'transitionOut'        : 'none',
+        // 'type'            : 'iframe'
+     });
+});
+
+function openCreateNewPoll()
+{
+$("#divCreateNewPoll").toggle();
+
+}
+var rowIndex=2;
+function addMoreOptions()
+{
+	rowIndex++;
+    var row = "<tr id='row_"+rowIndex+"'><td><label>Option</label></td><td><input type=text /></td><td><button onclick='removeRow("+rowIndex+");'>X</button></td></tr>";	
+    
+	$("#addMoreOptionsTable").append(row);
+
+	
+	
+}
+function removeRow(rowIndex){
+	
+    $('#row_'+rowIndex).remove();
+}
+</script>
+
+</head>
+<body>
+<div id="wrapper">
+  
+  <hr class="noscreen" />
+  <div class="content">
+    <div class="column-left">
+      <h3>LOGIN/REGISTER</h3>
+          
+       <p><a id="register" href="#registerDiv">REGISTER</a></p>
+       <p><a id="login" href="#loginDiv">LOGIN</a></p>
+
+<div class="hidden">
+    <div id="loginDiv">
+    <h2>LOGIN</h2>
+    <label>USERNAME:</label>
+        <input type="text"/></br>
+        <label>PASSWORD:</label>
+        <input type="text"/></br>
+        <input type="button" name="signIn" value="LOGIN"/>
+    </div>
+</div>
+      
+<div class="hidden">
+    <div id="registerDiv">
+    <h2>REGISTER</h2>
+    <table>
+    <tr>
+    <td>
+        <label>FIRSTNAME:</label></td>
+        <td>
+        <input type="text"/></br>
+       </td>
+        </tr>
+        <tr>
+        <td>
+        <label>LASTNAME:</label>
+        </td>
+        <td>
+        <input type="text"/></br>
+        </td>
+        </tr>
+        <tr>
+        <td>
+        <label>PASSWORD:</label>
+        </td>
+        <td>
+        <input type="text"/></br>
+        </td>
+        </tr>
+        <tr>
+        <td>
+        <label>EMAIL:</label></td><td>
+        <input type="text"/></br></td>
+        </tr>
+        <tr>
+        <td>
+        <input type="button" name="register" value="REGISTER"/></td></tr>
+        </table>
+    </div>
+</div>  
+      
+      
+      
+    </div>
+    
+    <div class="column-right">
+      <div class="box">
+        
+        <div class="box-in">
+          <h2>Welcome to Polling System</h2>
+         <div id="divMainPageContainer">
+
+<div id="divMainPageCenter">
+
+<input type="button" name="createNewPoll" value="createNewPoll" onclick="openCreateNewPoll();"/>
+<div id="divCreateNewPoll">
+<form id="submitForm">
+<table id="addMoreOptionsTable">
+<tr>
+<td>
+<label>CREATE POLL</label></td>
+<td>
+<textarea rows="1" cols="50"></textarea>
+</td>
+</tr>
+<tr>
+<td>
+<label>Option</label>
+</td>
+<td>
+<input type="text"/>
+</td>
+</tr>
+<tr>
+<td>
+<label>Option</label>
+</td>
+<td>
+<input type="text"/>
+</td>
+</tr>
+</table>
+<input type="submit" value="Submit"></input>
+
+</form>
+<div id="addMoreOptions">
+
+</div>
+<input type="button" name="addMoreOptions" value="Add More Options" onclick="addMoreOptions();"/>
+
+
+
+</div>
+
+</div>
+</div>
+</div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="cleaner">&nbsp;</div>
+  </div>
+</div>
+<div align=center>OSSCUBE<a href='http://www.osscube.com'>  OSSCUBE.COM</a></div></body>
+</html>

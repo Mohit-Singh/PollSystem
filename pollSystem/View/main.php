@@ -1,23 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Polling System</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="View/css/style.css" type="text/css"
-media="screen, projection, tv" />
-<link rel="stylesheet" href="View/css/style-print.css" type="text/css"
-media="print" />
-
-<style>
-</style>
+<title>polling</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="View/css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="./assets/js/fancybox/jquery.fancybox.css" type="text/css" media="screen"/>
 <script src="./assets/js/jquery-1.9.1.min.js"></script>
 <script src="./assets/js/jquery.tools.min.js"></script>
 
 <script src="./assets/js/fancybox/jquery.fancybox.js"></script>
-<link rel="stylesheet" href="./assets/js/fancybox/jquery.fancybox.css"
-type="text/css" media="screen"/>
-
-
 <script>
 $(document).ready(function(){
 
@@ -137,6 +128,7 @@ function loadAllPoll()
 function voteNow(id){
 
 	$.post('index.php',{"controller":"mainController","method":"pollLoad","queId":id},function(data){
+// 		alert(data);
 		$("#hiddenElemtnt").html(data);
 		});	
 }
@@ -246,6 +238,7 @@ text-align: center;
 color: #0A0A2A;
 font-family: 'Tangerine', serif;
 font-size: 12px;
+	padding:3px;
 }
 
 #pollTable td
@@ -262,17 +255,17 @@ font-size: 12px;
 
 #pollTable #odd
 {
-background-color : #A9F5BC;
+background-color : ;
 color:#0A0A2A;
 }
 #pollTable #even
 {
-background-color : #F5F6CE;
+background-color : #97C950;
 color:#0A0A2A;
 }
 #pollTable #tableHead
 {
-background-color : #2EFEF7;
+background-color : #97C950;
 color:#0A0A2A;
 }
 #header
@@ -283,20 +276,50 @@ color:#0A0A2A;
 
 </head>
 <body>
-<div id="header">
-      <h1>WELCOME TO POLLING SYSTEM</a></h1>
-
-</div>
-<div id="logOut"><a href="#" onclick="logOutUser();">LogOut</a></div>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="index.html"><span>Polling</span>System<br />
+          <small>Welcome to the world of polling </small></a></h1>
+      </div>
+      <div class="clr"></div>
+      <div class="menu">
+        <ul>
+          <li><a href="index.html" class="active"><span>Home</span></a></li>
+          <li><a href="services.html"><span>Services</span></a></li>
+          <li><a href="about.html"><span>About Us</span></a></li>
+          <li><a href="contact.html"><span>Contact Us</span></a></li>
+          <li><div id="logOut"><a href="#" onclick="logOutUser();">LogOut</a></div></li>
+        </ul>
+      </div>
+      <div class="search">
+        <form id="form1" name="form1" method="post" action="#">
+          <label><span>
+            <input name="q" type="text" class="keywords" id="textfield" maxlength="50" value="Search..." />
+            </span>
+            <input name="b" type="image" src="./View/css/images/search.gif" class="button" />
+          </label>
+        </form>
+      </div>
+      <div class="clr"></div>
+    </div>
+    <div class="headert_text_resize"> <img src="./View/css/images/img_main.jpg" alt="" width="970" height="338" /> </div>
+    <div class="clr"></div>
+  </div>
+  <div class="body">
+    <div class="body_resize">
+      <div class="left">
+       <h2>Welcome To The Polling System</h2>
+       <hr />
+       <h3>List Of all Polls</h3><hr />
 <div id="wrapper">
 
 <div id = "column-left" class="column-left">
-<h3>LOGIN/REGISTER</h3>
-<p><a id="register" href="#registerDiv">REGISTER</a></p>
-<p><a id="login" href="#loginDiv">LOGIN</a></p>
-<!--  <p><a id="viewPolling" href="#" onclick="viewPreviousPolls();">VIEW POLLINGS</a></p> -->
 
-<div class="hidden">
+
+
+<div class="hidden" style="display: none;">
 <div id="loginDiv">
 <h2>LOGIN</h2>
 <label>USERNAME:</label> <input type="text" id="userName"
@@ -306,7 +329,7 @@ id="signIn" name="signIn" value="LOGIN" />
 </div>
 </div>
 
-<div class="hidden">
+<div class="hidden" style="display: none;">
 <div id="registerDiv">
 <h2>REGISTER</h2>
 <table>
@@ -339,16 +362,64 @@ onclick="register()" /></td>
 <a id = "clickPollOpinion" href="#pollOpinion"></a>
 <div id = "pollOpinion"></div>
 <div id="column-right" class="column-right">
+
+
+
 <div id="box1" class="box"></div>
 </div>
 
 
 </div>
-
 <div id="hiddenElemtnt" ></div>
-
-<div align=center>
-OSSCUBE<a href='http://www.osscube.com'> OSSCUBE.COM</a>
+      </div>
+      <div class="right">
+        <h2>Menu</h2>
+        <ul>
+          <li>
+          <p><a id="register" href="#registerDiv"><blink>REGISTER</blink></a></p></li>
+<li><p><a id="login" href="#loginDiv"><blink>LOGIN</blink></a></p></li>
+          
+        </ul>
+        <h2>Sponsors</h2>
+        <ul class="sponsors">
+          <li class="sponsors"><a href="http://www.dreamtemplate.com">DreamTemplate</a><br />
+            Over 6,000+ Premium Web Templates</li>
+          <li class="sponsors"><a href="http://www.templatesold.com/">TemplateSOLD</a><br />
+            Premium WordPress &amp; Joomla Themes</li>
+          <li class="sponsors"><a href="http://www.imhosted.com">ImHosted.com</a><br />
+            Affordable Web Hosting Provider</li>
+          <li class="sponsors"><a href="http://www.csshub.com/">CSS Hub</a><br />
+            Premium CSS Templates</li>
+          <li class="sponsors"><a href="http://www.evrsoft.com">Evrsoft</a><br />
+            Website Builder Software &amp; Tools</li>
+          <li class="sponsors"><a href="http://www.myvectorstore.com">MyVectorStore</a><br />
+            Royalty Free Stock Icons</li>
+        </ul>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="FBG">
+    <div class="FBG_resize">
+      <div class="blok">
+       
+      </div>
+      <div class="blok">
+       
+      </div>
+      <div class="blok">
+       
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer_resize">
+      <p class="lf">&copy; Copyright <a href="#">Osscube</a>.</p>
+      <p class="rf">Layout <a href="http://www.hotwebsitetemplates.net/">OSSCUBE>COM</a></p>
+      <div class="clr"></div>
+    </div>
+    <div class="clr"></div>
+  </div>
 </div>
-</body>
 </html>
