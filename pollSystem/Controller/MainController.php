@@ -114,7 +114,7 @@ class MainController extends Acontroller{
 		//print_r($_POST);
 		//$userName=$_SESSION['username'];
     	if(!$_POST['comment']) {
-    		echo("comment can't b blank");die;
+    		echo("error2345");die;
     	}
 		$userName="abc";
 		$ob=$this->loadModel("commentModel");

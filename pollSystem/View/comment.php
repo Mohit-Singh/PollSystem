@@ -109,8 +109,13 @@ $.ajax({
 	    url: './index.php?controller=MainController&method=insertComment&questionId=<?php echo $data[0]['qId']?>',  
 	     data: $('#commentform').serialize(),
 	       success: function(data){
-			obj = jQuery.parseJSON(data);
-			alert("post has bn made");
+			
+			if(data.trim()=="error2345") {
+				alert("comment can't b blank");
+			}
+			else {
+				obj = jQuery.parseJSON(data);
+			alert("post has bn made"); }
 			 //$("#comments").append("---------------------------------");
 // 			 $('#comments').prepend("<ul id='example4' class='accordion'>");
 // 			 $('#example4').prepend("<li><h3>posted by  "+obj[0]+"</h3><div class=\"panel\">"+obj[1]+"</div></li>");

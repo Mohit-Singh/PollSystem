@@ -24,7 +24,7 @@
 		<?php 
 	}
 	?>Option<?php echo $count; ?>: <?php echo $val['options']?></td></tr>
-	<?php }?>
+	<?php $count++; }?>
 </table>
 <div id = "graph1" style="display:none">
  <canvas id="cvs" width="350" height="300">[No canvas support]</canvas>

@@ -30,13 +30,17 @@ $login = "no";
 echo "$('#logOut').hide();";
 }
 
-
 ?>
 
 
 loadAllPoll();
 $("#divCreateNewPoll").hide();
 $("#login").fancybox({
+	afterLoad : function(){
+	$("#userName").val('');
+	$("#password").val('');
+	return;
+	}
 // 'width' : screenW/2,
 // 'height' : screenH-210,
 // 'autoScale' : false,
@@ -46,7 +50,16 @@ $("#login").fancybox({
 });
 
 $("#register").fancybox({
-// 'width' : screenW/2,
+
+	afterLoad : function(){
+		$("#firstName").val('');
+		$("#lastName").val('');
+		$("#email").val('');
+		$("#registerPassword").val('');
+		return;
+		}
+
+// 'width' : screenW/2,http://www.codeproject.com/Tips/492632/Email-Validation-in-JavaScript
 // 'height' : screenH-210,
 // 'autoScale' : false,
 // 'transitionIn' : 'none',
@@ -54,6 +67,30 @@ $("#register").fancybox({
 // 'type' : 'iframe'
 });
 
+$("#firstName").keyup(function(ev) {
+	   // 13 is ENTER
+	   if (ev.which === 13 ) {
+		   $("#registerClick").trigger("click");
+	   }
+	}); 
+$("#lastName").keyup(function(ev) {
+	   // 13 is ENTER
+	   if (ev.which === 13 ) {
+		   $("#registerClick").trigger("click");
+	   }
+	}); 
+$("#email").keyup(function(ev) {
+	   // 13 is ENTER
+	   if (ev.which === 13 ) {
+		   $("#registerClick").trigger("click");
+	   }
+	}); 
+$("#registerPassword").keyup(function(ev) {
+	   // 13 is ENTER
+	   if (ev.which === 13 ) {
+		   $("#registerClick").trigger("click");
+	   }
+	}); 
 $("#userName").keyup(function(ev) {
 	   // 13 is ENTER
 	   if (ev.which === 13 ) {
@@ -66,7 +103,6 @@ $("#password").keyup(function(ev) {
 		   $("#signIn").trigger("click");
 	   }
 	}); 
-
 $("#clickPollOpinion").fancybox({
 	afterClose : function(){
 		$("#pollOpinion").html("");
@@ -130,7 +166,7 @@ function loadAllPoll()
         	str += "<td>" + val['question'] + "</td>" + "<td>" + val['username'] + "</td>"
         			+ "<td>" + val['first_name'] + " " + val['last_name'] + "</td>"
         			+ "<td>" + val['comment'] + "</td>" + "<td>" + val['votes'] + "</td>"
-        			+ "<td><input type='button' class='btn' value='View Details' onclick='voteNow(\""
+        			+ "<td><input type='button' value='View Details' onclick='voteNow(\""
         			+ val['id'] + "\")'>";
         	if($username == val['username'] && $login == "yes"){
         		str += "<td><input type='button' value='Delete' onclick='DeletePoll(\""
@@ -175,26 +211,51 @@ function removeRow(rowIndex) {
 	$('#row_' + rowIndex).remove();
 }
 
+function htmlEntities(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+} 
 
-function register() {
-	$.post('index.php', {
-		'controller' : 'mainController',
-		'method' : 'registerUser',
-		'firstName' : $('#firstName').val(),
-		'lastName' : $('#lastName').val(),
-		'email' : $('#email').val(),
-		'password' : $('#registerPassword').val(),
-	}, function(data, status) {
-		if (status == "success") {
-			if (data.trim() == "true") {
-				alert("you are successfully registered");
-				parent.$.fancybox.close();
-			} else {
-				alert("same email id alredy registered");
-				parent.$.fancybox.close();
+function checkEmail() {
+
+    var email = document.getElementById('email');
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+    if (!filter.test(email.value)) {
+    
+    $('#email').val('');
+ }
+}
+
+function register() {	
+	checkEmail();
+	if($('#email').val().trim() ==  "" )
+		alert('Please provide a valid email address');
+	if($('#email').val().trim() !=  ""  && $('#registerPassword').val().trim()  !=  "" 
+		&& $('#firstName').val().trim() !=  "" && $('#lastName').val().trim() !=  "" ) {
+		$.post('index.php', {
+			'controller' : 'mainController',
+			'method' : 'registerUser',
+			'firstName' : htmlEntities( $('#firstName').val() ),
+			'lastName' : htmlEntities( $('#lastName').val() ),
+			'email' : htmlEntities( $('#email').val() ),
+			'password' : htmlEntities( $('#registerPassword').val() ),
+		}, function(data, status) {
+			if (status == "success") {
+				if (data.trim() == "true") {
+					alert("you are successfully registered");
+					parent.$.fancybox.close();
+				} else {
+					alert("same email id alredy registered");
+					parent.$.fancybox.close();
+				}
 			}
+		});
 		}
-	});
+	else
+		{
+		alert("* fields are mendatory");
+	}
+	
 }
 
 function DeletePoll($id){
@@ -272,10 +333,9 @@ function viewPreviousPolls() {
 
 </script>
 <style>
-#logOut
-{
-float: right;
-margin-right: 50px;
+#logOut {
+	float: right;
+	margin-right: 50px;
 }
 #pollTable
 {
@@ -287,10 +347,9 @@ font-size: 12px;
 	padding:3px;
 }
 
-#pollTable td
-{
-	border: 1px solid black;	
-	height:30px;
+#pollTable td {
+	border: 1px solid black;
+	height: 30px;
 	width: auto;
 	overflow: hidden;
     text-overflow: ellipsis;
@@ -308,26 +367,15 @@ color:#0A0A2A;
 {
 background-color : #97C950;
 color:#0A0A2A;
-	
 }
 #pollTable #tableHead
 {
-background-color: #323A3F;
-color:white;
+background-color : #97C950;
+color:#0A0A2A;
 }
 
-#pollTable #tableHead td
-{
-	font-size: 15px;
-}
-
-#header
-{
-	border:2px solid black;
-}
-h2,h3
-{
-	
+#header {
+	border: 2px solid black;
 }
 </style>
 
@@ -343,10 +391,10 @@ h2,h3
       <div class="clr"></div>
       <div class="menu">
         <ul>
-          <li><a href="index.php" class="active"><span>Home</span></a></li>
-          <li><a href="#"><span>Services</span></a></li>
-          <li><a href="#"><span>About Us</span></a></li>
-          <li><a href="#"><span>Contact Us</span></a></li>
+          <li><a href="index.html" class="active"><span>Home</span></a></li>
+          <li><a href="services.html"><span>Services</span></a></li>
+          <li><a href="about.html"><span>About Us</span></a></li>
+          <li><a href="contact.html"><span>Contact Us</span></a></li>
           <li><div id="logOut"><a href="#" onclick="logOutUser();">LogOut</a></div></li>
         </ul>
       </div>
@@ -391,23 +439,23 @@ id="signIn" name="signIn" value="LOGIN" />
 <h2>REGISTER</h2>
 <table>
 <tr>
-<td><label>FIRSTNAME:</label></td>
+<td><label>* FIRSTNAME:</label></td>
 <td><input type="text" name="firstName" id="firstName" /></br></td>
 </tr>
 <tr>
-<td><label>LASTNAME:</label></td>
+<td><label>* LASTNAME:</label></td>
 <td><input type="text" name="lastName" id="lastName" /></br></td>
 </tr>
 <tr>
-<td><label>PASSWORD:</label></td>
+<td><label>* PASSWORD:</label></td>
 <td><input type="password" name="password" id="registerPassword" /></br></td>
 </tr>
 <tr>
-<td><label>EMAIL:</label></td>
-<td><input type="text" name="email" id="email" /></br></td>
+<td><label>* EMAIL:</label></td>
+<td><input  type="text" name="email" id="email" /></br></td>
 </tr>
 <tr>
-<td><input type="button" name="register" value="REGISTER"
+<td><input type="button" id="registerClick" name="register" value="REGISTER"
 onclick="register()" /></td>
 </tr>
 </table>
@@ -424,19 +472,19 @@ onclick="register()" /></td>
 </div>
 
 
-</div>
-<div id="hiddenElemtnt" ></div>
+	</div>
+	<div id="hiddenElemtnt"></div>
       </div>
 <?php
 if(!isset($_SESSION["username"]))
 {
 ?>      
       <div id = "divRight" class="right">
-        <h2>Register/Login</h2><hr />
+        <h2>Menu</h2>
         <ul>
           <li>
-          <p><a id="register" href="#registerDiv">REGISTER</a></p></li>
-          <li><p><a id="login" href="#loginDiv">LOGIN</a></p></li>
+          <p><a id="register" href="#registerDiv"><blink>REGISTER</blink></a></p></li>
+<li><p><a id="login" href="#loginDiv"><blink>LOGIN</blink></a></p></li>
           
         </ul>
       </div>
@@ -464,7 +512,7 @@ if(!isset($_SESSION["username"]))
   <div class="footer">
     <div class="footer_resize">
       <p class="lf">&copy; Copyright <a href="#">Osscube</a>.</p>
-      <p class="rf"> <a href="#">OSSCUBE.COM</a></p>
+      <p class="rf">Layout <a href="http://www.hotwebsitetemplates.net/">OSSCUBE>COM</a></p>
       <div class="clr"></div>
     </div>
     <div class="clr"></div>
