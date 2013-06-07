@@ -60,6 +60,8 @@ function vote(optId)
 						$("#hiddenElemtnt").html(data);
 						});
 		});	
+	$("#tableDiv").html("");
+	loadAllPoll();
 	
 }
 

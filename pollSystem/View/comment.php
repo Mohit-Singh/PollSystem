@@ -123,6 +123,8 @@ $.ajax({
 	     }
 	  });
 showComments();
+$("#column-right").html("");
+loadAllPoll();
 } 
 </script>
 </head>

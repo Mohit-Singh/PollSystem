@@ -112,7 +112,7 @@ function loadAllPoll()
     $.post('index.php',{"controller":"mainController","method":"loadAllPoll"},function(data){    
     //alert(data);
     	var result = jQuery.parseJSON(data);
-    	var str = "<table id='pollTable'>";
+    	var str = "<div id='tableDiv'><table id='pollTable'>";
     	str += "<tr id='tableHead'><td>Question</td>" + "<td>User Email Id</td>"
     			+ "<td>User Name</td>" + "<td>Comment Count</td>"
     			+ "<td>Votes Count</td><td>Vote Now</td>";
@@ -144,7 +144,7 @@ function loadAllPoll()
         	str += "</tr>";
         	count++;
         });
-        str+="</table>";
+        str+="</table></div>";
         $("#column-right").append(str);
     });    
 }
@@ -203,10 +203,13 @@ function DeletePoll($id){
 		type : 'post',
 		data : "QuestionId="+$id,
 		success : function(data) {
-			alert("Succesfully deleted");
+			$status = confirm("you want to delete");
+			if($status == true){
 			$("#hiddenElemtnt").html("");
 			$("#pollTable").remove();
 			loadAllPoll();
+			}
+			
 			
 			//location.reload();
 			// $("#column-right").load("./View/poll.php");
@@ -406,9 +409,6 @@ onclick="register()" /></td>
 <div id = "pollOpinion"></div>
 <div id = "createPoll"></div>
 <div id="column-right" class="column-right">
-
-
-
 <div id="box1" class="box"></div>
 </div>
 
