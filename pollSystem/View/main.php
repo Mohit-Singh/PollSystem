@@ -166,7 +166,7 @@ function loadAllPoll()
         	str += "<td>" + val['question'] + "</td>" + "<td>" + val['username'] + "</td>"
         			+ "<td>" + val['first_name'] + " " + val['last_name'] + "</td>"
         			+ "<td>" + val['comment'] + "</td>" + "<td>" + val['votes'] + "</td>"
-        			+ "<td><input type='button' value='View Details' onclick='voteNow(\""
+        			+ "<td><input type='button' class='btn' value='View Details' onclick='voteNow(\""
         			+ val['id'] + "\")'>";
         	if($username == val['username'] && $login == "yes"){
         		str += "<td><input type='button' value='Delete' onclick='DeletePoll(\""
@@ -370,13 +370,21 @@ color:#0A0A2A;
 }
 #pollTable #tableHead
 {
-background-color : #97C950;
-color:#0A0A2A;
+	background-color: #323A3F;
+	color:white; 
 }
 
-#header {
-	border: 2px solid black;
+#pollTable #tableHead td
+{
+  font-size: 15px;
 }
+
+#header
+{
+  border:2px solid black;
+} 
+
+
 </style>
 
 </head>
