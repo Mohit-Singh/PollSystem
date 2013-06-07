@@ -188,7 +188,6 @@ function loadAllPoll()
 function voteNow(id){
 
 	$.post('index.php',{"controller":"mainController","method":"pollLoad","queId":id},function(data){
-// 		alert(data);
 		$("#hiddenElemtnt").html(data);
 		});	
 }

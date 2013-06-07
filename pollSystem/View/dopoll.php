@@ -1,7 +1,11 @@
     <script src="./assets/js/RGraph.common.core.js" ></script>
     <script src="./assets/js/RGraph.common.effects.js" ></script>
+        <script src="./assets/js/RGraph.common.dynamic.js" ></script>
+    <script src="./assets/js/RGraph.common.tooltips.js" ></script>
     <script src="./assets/js/RGraph.pie.js" ></script>
       <script src="./assets/js/RGraph.hbar.js" ></script>
+      <script src="./assets/js/RGraph.bar.js" ></script>
+       <script src="./assets/js/RGraph.radar.js" ></script>
     <link rel="stylesheet" href="./assets/css/demos.css" type="text/css" media="screen" />
 <div id="questionDiv">
 <h2>Poll</h2>
@@ -26,6 +30,14 @@
 	?>Option<?php echo $count; ?>: <?php echo $val['options']?></td></tr>
 	<?php $count++; }?>
 </table>
+
+<div id = "graph3" style="float:left">
+ <canvas id="cvs3" width="350" height="300">[No canvas support]</canvas>
+</div>
+<div id = "graph4" style="float:left">
+  <canvas id="cvs4" width="350" height="300">[No canvas support]</canvas>
+</div>
+
 <div id = "graph1" style="display:none">
  <canvas id="cvs" width="350" height="300">[No canvas support]</canvas>
 </div>
@@ -106,12 +118,15 @@ $.post('index.php',{"controller":"mainController",
 	
 	function loadGraph(opt,vot)
 	{
-		var donut = new RGraph.Pie('cvs', vot)
-        .Set('variant', 'donut')
+        var pie = new RGraph.Pie('cvs', vot)
+        .Set('origin', 0)
+        .Set('tooltips', opt)
         .Set('labels', opt)
-        .Set('strokestyle', 'transparent')
-        .Set('exploded', 3)
-  		  RGraph.Effects.Pie.RoundRobin(donut, {'radius': false,'frames':60});
+        .Set('shadow', true)
+        .Draw();
+
+    setTimeout(function () {pie.Explode(0,10);}, 250);
+		  
 
         var hbar = new RGraph.HBar('cvs2', vot)
         .Set('background.grid.hlines', false)
@@ -127,6 +142,39 @@ $.post('index.php',{"controller":"mainController",
         .Set('xlabels', false)
 
    		RGraph.Effects.HBar.Grow(hbar);
+
+
+        bar = new RGraph.Bar('cvs3', vot)
+        .Set('labels', opt)
+        .Set('colors', ['#164366'])
+        .Set('ylabels', false)
+    	RGraph.Effects.Bar.Grow(bar);
+
+
+        var pie = new RGraph.Pie('cvs4', vot)
+        .Set('strokestyle', '#e8e8e8')
+        .Set('linewidth', 5)
+        .Set('shadow', true)
+        .Set('shadow.offsety', 15)
+        .Set('shadow.offsetx', 0)
+        .Set('shadow.color', '#aaa')
+        .Set('exploded', 10)
+        .Set('radius', 80)
+        .Set('tooltips', opt)
+        .Set('tooltips.coords.page', true)
+        .Set('labels', opt)
+        .Set('labels.sticks', true)
+        .Set('labels.sticks.length', 15)
+    
+    // This is the factor that the canvas is scaled by
+    var factor = 1.5;
+
+    // Set the transformation of the canvas - a scale up by the factor (which is 1.5 and a simultaneous translate
+    // so that the Pie appears in the center of the canvas
+    pie.context.setTransform(factor,0,0,1,((pie.canvas.width * factor) - pie.canvas.width) * -0.5,0);
+
+    //pie.Draw();
+    RGraph.Effects.Pie.RoundRobin(pie, {frames:30});
 	}
 
 </script>
