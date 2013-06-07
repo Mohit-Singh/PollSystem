@@ -169,7 +169,7 @@ function loadAllPoll()
         			+ "<td><input type='button' class='btn' value='View Details' onclick='voteNow(\""
         			+ val['id'] + "\")'>";
         	if($username == val['username'] && $login == "yes"){
-        		str += "<td><input type='button' value='Delete' onclick='DeletePoll(\""
+        		str += "<td><input type='button' class='btn' value='Delete' onclick='DeletePoll(\""
         			+ val['id'] + "\")'></td>";
         	}
         	else{
