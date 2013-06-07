@@ -162,7 +162,7 @@ $.post('index.php',{"controller":"mainController",
         .Set('radius', 80)
         .Set('tooltips', opt)
         .Set('tooltips.coords.page', true)
-        .Set('labels', opt)
+        .Set('labels', [])
         .Set('labels.sticks', true)
         .Set('labels.sticks.length', 15)
     

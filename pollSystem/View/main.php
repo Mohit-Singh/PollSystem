@@ -41,12 +41,6 @@ $("#login").fancybox({
 	$("#password").val('');
 	return;
 	}
-// 'width' : screenW/2,
-// 'height' : screenH-210,
-// 'autoScale' : false,
-// 'transitionIn' : 'none',
-// 'transitionOut' : 'none',
-// 'type' : 'iframe'
 });
 
 $("#register").fancybox({
@@ -58,14 +52,9 @@ $("#register").fancybox({
 		$("#registerPassword").val('');
 		return;
 		}
-
-// 'width' : screenW/2,http://www.codeproject.com/Tips/492632/Email-Validation-in-JavaScript
-// 'height' : screenH-210,
-// 'autoScale' : false,
-// 'transitionIn' : 'none',
-// 'transitionOut' : 'none',
-// 'type' : 'iframe'
 });
+
+
 
 $("#firstName").keyup(function(ev) {
 	   // 13 is ENTER
@@ -189,7 +178,11 @@ function voteNow(id){
 
 	$.post('index.php',{"controller":"mainController","method":"pollLoad","queId":id},function(data){
 		$("#hiddenElemtnt").html(data);
-		});	
+
+		document.getElementById('questionDiv').scrollIntoView();
+		});
+
+	
 }
 
 function openCreateNewPoll() {
@@ -388,7 +381,7 @@ color:#0A0A2A;
 
 </head>
 <body>
-<div class="main">
+<div class="main">	
   <div class="header">
     <div class="header_resize">
       <div class="logo">
@@ -479,7 +472,7 @@ onclick="register()" /></td>
 </div>
 
 
-	</div>
+	</div>	
 	<div id="hiddenElemtnt"></div>
       </div>
 <?php
