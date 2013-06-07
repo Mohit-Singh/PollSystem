@@ -55,6 +55,22 @@ h1 span {
 	font-weight:bold;
 	color:#8fc400;
 }
+
+h3{
+	font-weight:bold;
+	color:#8fc400;
+}
+
+ .btn
+        {
+	        border:1px solid #7777777;
+        	background: #8fc400;
+        	color: white;
+        	font: bold 15 px 'Trebuchet MS';
+        	padding: 4px;
+        	cursor: pointer;
+        }
+        
 h1 small {
 	font:normal 13px/1.2em Arial, Helvetica, sans-serif;
 	color:#888;
@@ -207,11 +223,11 @@ h1 small {
     background-origin: padding-box;
     background-position: center top;
     background-repeat: no-repeat;
-    background-size: 700px auto;
+    background-size:  auto;
     float: left;
     height: auto;
     margin: 0;
-    width: 700px;
+    width: auto;
 }
 .right {
 	float:right;

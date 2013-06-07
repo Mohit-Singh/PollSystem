@@ -130,7 +130,7 @@ function loadAllPoll()
         	str += "<td>" + val['question'] + "</td>" + "<td>" + val['username'] + "</td>"
         			+ "<td>" + val['first_name'] + " " + val['last_name'] + "</td>"
         			+ "<td>" + val['comment'] + "</td>" + "<td>" + val['votes'] + "</td>"
-        			+ "<td><input type='button' value='View Details' onclick='voteNow(\""
+        			+ "<td><input type='button' class='btn' value='View Details' onclick='voteNow(\""
         			+ val['id'] + "\")'>";
         	if($username == val['username'] && $login == "yes"){
         		str += "<td><input type='button' value='Delete' onclick='DeletePoll(\""
@@ -308,15 +308,26 @@ color:#0A0A2A;
 {
 background-color : #97C950;
 color:#0A0A2A;
+	
 }
 #pollTable #tableHead
 {
-background-color : #97C950;
-color:#0A0A2A;
+background-color: #323A3F;
+color:white;
 }
+
+#pollTable #tableHead td
+{
+	font-size: 15px;
+}
+
 #header
 {
 	border:2px solid black;
+}
+h2,h3
+{
+	
 }
 </style>
 
@@ -332,10 +343,10 @@ color:#0A0A2A;
       <div class="clr"></div>
       <div class="menu">
         <ul>
-          <li><a href="index.html" class="active"><span>Home</span></a></li>
-          <li><a href="services.html"><span>Services</span></a></li>
-          <li><a href="about.html"><span>About Us</span></a></li>
-          <li><a href="contact.html"><span>Contact Us</span></a></li>
+          <li><a href="index.php" class="active"><span>Home</span></a></li>
+          <li><a href="#"><span>Services</span></a></li>
+          <li><a href="#"><span>About Us</span></a></li>
+          <li><a href="#"><span>Contact Us</span></a></li>
           <li><div id="logOut"><a href="#" onclick="logOutUser();">LogOut</a></div></li>
         </ul>
       </div>
@@ -421,11 +432,11 @@ if(!isset($_SESSION["username"]))
 {
 ?>      
       <div id = "divRight" class="right">
-        <h2>Menu</h2>
+        <h2>Register/Login</h2><hr />
         <ul>
           <li>
-          <p><a id="register" href="#registerDiv"><blink>REGISTER</blink></a></p></li>
-<li><p><a id="login" href="#loginDiv"><blink>LOGIN</blink></a></p></li>
+          <p><a id="register" href="#registerDiv">REGISTER</a></p></li>
+          <li><p><a id="login" href="#loginDiv">LOGIN</a></p></li>
           
         </ul>
       </div>
@@ -453,7 +464,7 @@ if(!isset($_SESSION["username"]))
   <div class="footer">
     <div class="footer_resize">
       <p class="lf">&copy; Copyright <a href="#">Osscube</a>.</p>
-      <p class="rf">Layout <a href="http://www.hotwebsitetemplates.net/">OSSCUBE>COM</a></p>
+      <p class="rf"> <a href="#">OSSCUBE.COM</a></p>
       <div class="clr"></div>
     </div>
     <div class="clr"></div>
