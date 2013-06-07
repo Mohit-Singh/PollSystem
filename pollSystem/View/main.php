@@ -399,10 +399,10 @@ color:#0A0A2A;
       <div class="clr"></div>
       <div class="menu">
         <ul>
-          <li><a href="index.html" class="active"><span>Home</span></a></li>
-          <li><a href="services.html"><span>Services</span></a></li>
-          <li><a href="about.html"><span>About Us</span></a></li>
-          <li><a href="contact.html"><span>Contact Us</span></a></li>
+          <li><a href="index.php" class="active"><span>Home</span></a></li>
+          <li><a href="#"><span>Services</span></a></li>
+          <li><a href="#"><span>About Us</span></a></li>
+          <li><a href="#"><span>Contact Us</span></a></li>
           <li><div id="logOut"><a href="#" onclick="logOutUser();">LogOut</a></div></li>
         </ul>
       </div>
