@@ -92,6 +92,7 @@ if(data.trim() != "Account Does not exist" && data.trim() != "Password does not 
 $("#divRight").hide();
 $('#logOut').show();
 $("#column-right").html("");
+$("#createPoll").html(data);
 $username = $("#userName").val();
 $login = "yes";
 loadAllPoll();
@@ -403,6 +404,7 @@ onclick="register()" /></td>
 </div>
 <a id = "clickPollOpinion" href="#pollOpinion"></a>
 <div id = "pollOpinion"></div>
+<div id = "createPoll"></div>
 <div id="column-right" class="column-right">
 
 
