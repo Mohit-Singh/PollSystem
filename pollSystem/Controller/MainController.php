@@ -63,17 +63,10 @@ class MainController extends Acontroller{
     
     public function viewPreviousPolls()
     {
-    	    	 
+        $question_id = $_GET['question']; 
     	$userObj = $this->loadModel('User');
-    	$result = $userObj->viewPreviousPolls();
-    	
-    	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-    	
-    		$str="id:".$row['id']."Question:".$row['question']."<button onclick='showOpinions(".$row['id'].");'>Show Opinions</button></br>";
-    		echo $str;
-    		
-    	}  	 
-    	 
+    	$result = $userObj->viewPreviousPolls($question_id);    	 
+    	echo json_encode($result);
     }
     
     public function loadPreviousPoll()
@@ -83,19 +76,22 @@ class MainController extends Acontroller{
     
     public function showOpinions()
     {
-    	$id=$_POST['questionid'];
+    	$id=$_GET['question'];
     	$userObj = $this->loadModel('User');
     	$result = $userObj->showOpinions($id);
-    	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    	
+    	foreach($result as $key => $value){
     		 
-    		$str[] = "OPTION:".$row['options'];
+    		$str[] = "OPTION:".$value;
     	}
     	$str[] = 	"<img id=\"activityReportIMG\" alt=\"userActivityReport\"
     		        . src=\"index.php?controller=PollGraph&method=createGraph"
     		        ."&question=".$id
     		        ."&raw=".microtime()."\" width=\"220\" height=\"200\">";
+    	
     	echo json_encode($str);
-    	$userObj->getTotalPoll(1);
+    	
+    	//$userObj->getTotalPoll(1);
     }
     
     function userLogOut()
@@ -104,31 +100,90 @@ class MainController extends Acontroller{
     }
     
     public function pollLoad(){
+    	
     	$objPollLoad=$this->loadModel("PolledBy");
     	$que=$objPollLoad->selectPoll($_POST['queId']);
-    	print_r($que);
-    	return $que;
+    	
+    	    		return $que;
     }
+    
+    public function pollNow()
+    {
+    	$objPollLoad=$this->loadModel("PolledBy");
+    	$poll=$objPollLoad->chkPoll($_POST['LoginUsername'],$_POST['QuestionId']);
+    	if(count($poll) ==0 )
+    	{
+    		$objPollLoad->makePoll($_POST);
+    	}
+    	else 
+    	{
+    		$objPollLoad->updatePoll($_POST);
+    	}
+    	
+    }
+    public function getOption()
+    {
+    	$objPollLoad=$this->loadModel("PolledBy");
+    	$poll=$objPollLoad->chkPoll($_POST['LoginUsername'],$_POST['QuestionId']);
+    	if(count($poll) ==0 )
+    	{
+    		echo "0";
+    	}
+    	else
+    	{
+    		echo $poll[0]['options_id'];
+    	}
+    }
+    
+    public  function graphData()
+    {
+    	$objPollLoad=$this->loadModel("Question");
+    	$result['options']=$objPollLoad->getOption($_POST['QuestionId']);
+    	$objVoteCount=$this->loadModel("PolledBy");
+    	$count=0;
+    	foreach ($result['options'] as $key => $val)
+    	{
+    		
+    		$result['votes'][$val['id']]=$objVoteCount->getOptCount($val['id']);
+    		$count+=$result['votes'][$val['id']];  		
+    	}
+    	$result['totalVote']=$count;
+    	//print_r($result);
+    	echo json_encode($result);  	
+    } 
+    
     public function insertComment() {
 		//echo "in contr";
 		//print_r($_POST);
-		//$userName=$_SESSION['username'];
-    	if(!$_POST['comment']) {
-    		echo("error2345");die;
-    	}
-		$userName="abc";
+		$userName=$_SESSION['userId'];
+		
+		if(empty($_POST['comment'])) {
+			echo("comment can't b blank");
+			die;
+		}
+		//$userName="abc";
 		$ob=$this->loadModel("commentModel");
 		$_POST['comment']=htmlentities($_POST['comment']);
-		$ob->addComment($userName,$_POST['comment'],$_GET['questionId']);
+		$ob->addComment($userName,$_POST['comment'],$_REQUEST['questionId']);
 		$commentAr=array($userName,$_POST['comment']);
+		//rsort($commentAr);
 		echo json_encode($commentAr);
 	}
+	
 	public function getComment() {
-
-
+		
 		$ob=$this->loadModel("commentModel");
-		$ob->getComments($_GET['questionId']);
+		$ob->getComments($_REQUEST['questionId']);
 
+	}
+	
+	public function deleteComment() {
+		$ob=$this->loadModel("commentModel");
+		$ob->removeComments($_REQUEST['cid']);
+	}
+	public function delPoll(){
+	    $objPoll =$this->loadModel("Question");
+	    $objPoll->delPoll($_POST['QuestionId']);	    
 	}
 }
 

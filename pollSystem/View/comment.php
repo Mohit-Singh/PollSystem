@@ -80,8 +80,13 @@ function showComments(){
 			$.each(data,function(i,value){
 				if(i==0) {
 				  $('#comments').prepend("<ul id='example4' class='accordion'>"); }
-				  $('#example4').prepend("<li><h3>posted by  "+value['login_id']+" on "+value['date_time']+"</h3><div class=\"panel\">   "+value['comment']+"</div></li>");
-				 //  $("#comments").append(" posted by ");
+				  if(value['delete']=="true") {
+				  $('#example4').prepend("<li id="+i+"><h3>posted by  "+value['login_id']+" on "+value['date_time']+"<input type=\"button\" name=\"deleteLink\" id="+i+" onclick=\"f("+value['id']+")\" value=\"delete\"></a></img></h3><div class=\"panel\">"+value['comment']+"</div></li>");
+				  }
+				  else {
+				  $('#example4').prepend("<li id="+i+"><h3>posted by  "+value['login_id']+" on "+value['date_time']+"</h3><div class=\"panel\">"+value['comment']+"</div></li>");
+				  }
+				//  $("#comments").append(" posted by ");
 				   
 				// $("#comments").append("on ");
 				// $("#comments").append(value['date_time']);
@@ -90,7 +95,7 @@ function showComments(){
 				//$('#comments').append("<div class='panel loading'>");
 				//$("#comments").append(value['comment']); 
 				//$("#comments").append("</div></li>"); 
-				 
+				 //<img src=\"del.jpg\" width=\"50\" height=\"50\" border=\"2\">
 				 //$("#comments").append("--------------------------</br>");
 			});
 			
@@ -101,6 +106,33 @@ function showComments(){
 	  });
 	$("#postCommentText").val("");
 }
+function f(idd) {
+//alert(idd);
+	
+$.ajax({
+		type: "POST",
+	    url: './index.php?controller=MainController&method=deleteComment&cid='+idd,  
+	     //data: ({cid: idd}),
+	       success: function(data){
+			
+			
+			alert("deleted"); }
+			 //$("#comments").append("---------------------------------");
+// 			 $('#comments').prepend("<ul id='example4' class='accordion'>");
+// 			 $('#example4').prepend("<li><h3>posted by  "+obj[0]+"</h3><div class=\"panel\">"+obj[1]+"</div></li>");
+// 			 showAccordian();
+			 // 	    	 $("#comments").prepend(obj[1]);
+// 	    	 $("#comments").prepend(" posted by ");
+// 	    	 $("#comments").prepend(obj[0]);
+// 	    	 $("#comments").prepend("</br>");
+// 			 $("#comments").prepend("---------------------</br>");
+	     
+	  });
+	  showComments();
+$("#column-right").html("");
+loadAllPoll();
+}
+
 function postComment()
 {
 	

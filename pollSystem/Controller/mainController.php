@@ -155,25 +155,31 @@ class MainController extends Acontroller{
     public function insertComment() {
 		//echo "in contr";
 		//print_r($_POST);
-		//$userName=$_SESSION['username'];
-		if(!$_POST['comment']) {
+		$userName=$_SESSION['userId'];
+		
+		if(empty($_POST['comment'])) {
 			echo("comment can't b blank");
+			die;
 		}
-		$userName="abc";
+		//$userName="abc";
 		$ob=$this->loadModel("commentModel");
 		$_POST['comment']=htmlentities($_POST['comment']);
-		$ob->addComment($userName,$_POST['comment']);
+		$ob->addComment($userName,$_POST['comment'],$_REQUEST['questionId']);
 		$commentAr=array($userName,$_POST['comment']);
 		//rsort($commentAr);
 		echo json_encode($commentAr);
 	}
 	
 	public function getComment() {
-
-
+		
 		$ob=$this->loadModel("commentModel");
-		$ob->getComments("1");
+		$ob->getComments($_REQUEST['questionId']);
 
+	}
+	
+	public function deleteComment() {
+		$ob=$this->loadModel("commentModel");
+		$ob->removeComments($_REQUEST['cid']);
 	}
 	public function delPoll(){
 	    $objPoll =$this->loadModel("Question");
