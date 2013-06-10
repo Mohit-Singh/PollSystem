@@ -390,6 +390,22 @@ color:#0A0A2A;
         <h1><a href="index.html"><span>Polling</span>System<br />
           <small>Welcome to the world of polling </small></a></h1>
       </div>
+      <?php
+if(!isset($_SESSION["username"]))
+{
+?>      
+      <div id = "divRight" class="right">
+<!--         <h2>Menu</h2> -->
+        <ul>
+          <li>
+          <p><a id="register" href="#registerDiv"><blink>REGISTER</blink></a></p></li>
+<li><p><a id="login" href="#loginDiv">| <blink>LOGIN</blink></a></p></li>
+          
+        </ul>
+      </div>
+<?php 
+}
+?>
       <div class="clr"></div>
       <div class="menu">
         <ul>
@@ -478,22 +494,7 @@ onclick="register()" /></td>
 	</div>	
 	<div id="hiddenElemtnt"></div>
       </div>
-<?php
-if(!isset($_SESSION["username"]))
-{
-?>      
-      <div id = "divRight" class="right">
-        <h2>Menu</h2>
-        <ul>
-          <li>
-          <p><a id="register" href="#registerDiv"><blink>REGISTER</blink></a></p></li>
-<li><p><a id="login" href="#loginDiv"><blink>LOGIN</blink></a></p></li>
-          
-        </ul>
-      </div>
-<?php 
-}
-?>      
+      
       
       <div class="clr"></div>
     </div>

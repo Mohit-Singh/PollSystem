@@ -38,6 +38,8 @@ p.clr, .clr {
 }
 .logo {
 	margin:0;
+	width: 300px;
+	float: left;
 }
 h1 {
 	margin:0;
@@ -234,7 +236,7 @@ h1 small {
 	width:210px;
 	margin:0;
 	/*padding:0 25px;*/
-	background:url(images/r_bg.gif) top center no-repeat;
+/* 	background:url(images/r_bg.gif) top center no-repeat; */
 }
 .right ul {
 	list-style:none;
@@ -245,8 +247,10 @@ h1 small {
 	background:10px 10px no-repeat;
 	font:normal 14px Arial, Helvetica, sans-serif;
 	color:#464646;
-	padding:5px 0;
-	margin:3px 0;
+	float : left;
+	
+/* 	padding:5px 0; */
+/* 	margin:3px 0; */
 }
 .right li a {
 	padding:0 0 0 5px;

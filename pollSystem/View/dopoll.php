@@ -115,6 +115,25 @@ $.post('index.php',{"controller":"mainController",
 
 				});
 
+				$.ajax({
+					url : './index.php?controller=mainController&method=showOpinions',
+					type : 'post',
+					async : false,
+					data : "questionid=" + <?php echo $data[0]['qId']?>,
+					dataType: "json",
+					success : function(data) {
+						$("#show").html('');
+						$.each(data,function(i,value){
+							//alert(value[1]);
+							$("#show").append(value);
+							//$("#show").append(value[1]);
+
+							});
+						$("#show").append("</br>");
+						//$("#show").append(data);
+					}
+				});
+				
 				loadGraph(options,votes);			
 	});
 	
