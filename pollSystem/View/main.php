@@ -336,17 +336,20 @@ color: #0A0A2A;
 font-family: 'Tangerine', serif;
 font-size: 12px;
 	padding:3px;
+
 }
 
 #pollTable td {
 	border: 1px solid black;
 	height: 30px;
+	
 	width: auto;
 	overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-	 font-family:Verdana, Arial, Helvetica, sans-serif;
+/*     text-overflow: ellipsis;  */
+/*     white-space: nowrap;  */
+	font-family:Verdana, Arial, Helvetica, sans-serif;
     font-size: 11px;
+	word-wrap:break-word;
 }
 
 #pollTable #odd
@@ -395,6 +398,7 @@ color:#0A0A2A;
           <li><a href="#"><span>About Us</span></a></li>
           <li><a href="#"><span>Contact Us</span></a></li>
           <li><div id="logOut"><a href="#" onclick="logOutUser();">LogOut</a></div></li>
+          
         </ul>
       </div>
       <div class="search">

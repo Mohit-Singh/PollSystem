@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="./assets/css/demos.css" type="text/css" media="screen" />
 <div id="questionDiv">
 <h2>Poll</h2>
+<div id="linkGraph">
 <a href="#graph1" id = "graph1Click">Graph 1</a>
 <a href="#graph2" id = "graph2Click">Graph 2</a>
 <a href="#questionComments" id = "questionCommentsClick">Comments</a>
+</div>
 <table id = "tableDiv" style = "margin : auto; padding-bottom : 10px;float:left;">
 <tr>
 	<td>Question: <?php  echo $data[0]['question'];?></td>
@@ -31,7 +33,7 @@
 	<?php $count++; }?>
 </table>
 
-<div id = "graph3" style="float:left">
+<div id = "graph3" style="float:left; clear:both;">
  <canvas id="cvs3" width="350" height="300">[No canvas support]</canvas>
 </div>
 <div id = "graph4" style="float:left">
