@@ -21,7 +21,7 @@ $("#dopoll").click(function() {
 		
 		<a href = "#divCreateNewPoll" id = "CreateNewPollClick">
 		
-			<input type="button" class="btn" name="createNewPoll" value="createNewPoll"/><hr />
+			<input type="button" class="btn" name="createNewPoll" value="createNewPoll"/>
 			<div id="divCreateNewPoll" style = "display:none">
 				<form id="submitForm">
 					<table id="addMoreOptionsTable">

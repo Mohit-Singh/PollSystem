@@ -12,7 +12,7 @@
 <a href="#graph1" id = "graph1Click">Graph 1</a>
 <a href="#graph2" id = "graph2Click">Graph 2</a>
 <a href="#questionComments" id = "questionCommentsClick">Comments</a>
-<table id = "tableDiv" style = "margin : auto; padding-bottom : 10px;">
+<table id = "tableDiv" style = "margin : auto; padding-bottom : 10px;float:left;">
 <tr>
 	<td>Question: <?php  echo $data[0]['question'];?></td>
 </tr>

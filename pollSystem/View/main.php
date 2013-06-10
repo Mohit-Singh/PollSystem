@@ -135,8 +135,9 @@ $.fancybox.close();
 function loadAllPoll()
 {	
     $.post('index.php',{"controller":"mainController","method":"loadAllPoll"},function(data){    
-    //alert(data);
+    
     	var result = jQuery.parseJSON(data);
+    	
     	var str = "<div id='tableDiv'><table id='pollTable'>";
     	str += "<tr id='tableHead'><td>Question</td>" + "<td>User Email Id</td>"
     			+ "<td>User Name</td>" + "<td>Comment Count</td>"
@@ -515,5 +516,6 @@ if(!isset($_SESSION["username"]))
     </div>
     <div class="clr"></div>
   </div>
+  
 </div>
 </html>
