@@ -132,22 +132,60 @@ $.fancybox.close();
 });
 });
 
+$paging = "";
+
 function loadAllPoll()
-{	$.ajaxSetup({async: false});
+{
+	$perPagePoll = 2;
+	str = "";
+	$flag = 0;
+	
+	$.ajaxSetup({async: false});
     $.post('index.php',{"controller":"mainController","method":"loadAllPoll"},function(data){    
     
     	var result = jQuery.parseJSON(data);
+    	$dataLength = result.length;
+        //alert($dataLength % $perPagePoll);
     	
-    	var str = "<div id='tableDiv'><table id='pollTable'>";
-    	str += "<tr id='tableHead'><td>Question</td>" + "<td>User Email Id</td>"
-    			+ "<td>User Name</td>" + "<td>Comment Count</td>"
-    			+ "<td>Votes Count</td><td>Vote Now</td>";
-		if($login == "yes"){
-			str += "<td>Delete Poll</td>";
-		}
-    	str += "</tr>";
-        var count=0;
-        $.each(result, function(key,val){
+    	if(($dataLength % $perPagePoll) == 0)
+    	{        	
+        	$paging = new Array(Math.floor($dataLength / $perPagePoll));
+    	}
+    	else{    		
+    		$paging = new Array(Math.floor($dataLength / $perPagePoll)+1);
+    	}
+        //alert($paging.length);
+        $questionCount = 0;
+        
+    	for($i = 0 ; $i < $paging.length ; $i++){
+        	
+    		$paging[$i] = "<div id='tableDiv'>"
+    		+"<table id='pollTable'>"
+    		+"<tr id='tableHead'><td>Question</td>" + "<td>User Email Id</td>"
+    		+"<td>User Name</td>" + "<td>Comment Count</td>"
+    		+"<td>Votes Count</td><td>Vote Now</td>";
+    		if($login == "yes"){
+    			$paging[$i] += "<td>Delete Poll</td>";
+    		}
+    		$paging[$i] += "</tr>";    		
+    		var count=0;
+    		str = "";
+    		
+        	for($j = 0; $j < $perPagePoll ; $j++){
+        	    val = result[$questionCount];
+        	    
+//     	var str = "<div id='tableDiv'>";    	
+//     	str += "<table id='pollTable'>";    	
+//     	str += "<tr id='tableHead'><td>Question</td>" + "<td>User Email Id</td>"
+//     			+ "<td>User Name</td>" + "<td>Comment Count</td>"
+//     			+ "<td>Votes Count</td><td>Vote Now</td>";
+		
+// 		if($login == "yes"){
+// 			str += "<td>Delete Poll</td>";
+// 		}
+//     	str += "</tr>";
+        
+
         	if (count % 2 == 0) {
         		str += "<tr id='odd'>";
         	} else {
@@ -169,10 +207,33 @@ function loadAllPoll()
         	}
         	str += "</tr>";
         	count++;
-        });
-        str+="</table></div>";
-        $("#column-right").append(str);
-    });    
+        	if($questionCount < result.length){
+        		$questionCount++;
+        	}
+        	if($questionCount >= result.length){
+            	$flag = 1;
+            	break;
+        	}
+        	//alert($dataLength);
+        	//alert(result[$questionCount]['username']);
+        	}        	
+        	$paging[$i] += str;
+        	$paging[$i] += "</table></div>";
+        	if($flag){
+            	break;
+        	}        	        	
+    	}    	
+        $("#column-right").append($paging[0]);
+    });
+     for($i = 0 ; $i < $paging.length ; $i++){
+         $("#pagingLinks").append("<input type = \"button\" value = \""+($i+1)+"\" onClick = \"pagination('"+($i)+"')\" />");
+     }
+}
+
+
+function pagination($page){
+	//alert($paging[$page]);
+	$("#column-right").html($paging[$page]);
 }
 
 function voteNow(id){
@@ -489,6 +550,7 @@ onclick="register()" /></td>
 <div id="column-right" class="column-right">
 <div id="box1" class="box"></div>
 </div>
+<div id = "pagingLinks"></div>
 
 
 	</div>	
