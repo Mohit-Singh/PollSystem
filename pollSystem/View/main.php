@@ -251,24 +251,22 @@ function register() {
 }
 
 function DeletePoll($id){
-	$.ajax({
-		url : './index.php?controller=mainController&method=delPoll',
-		type : 'post',
-		data : "QuestionId="+$id,
-		success : function(data) {
-			$status = confirm("you want to delete");
-			if($status == true){
-			$("#hiddenElemtnt").html("");
-			$("#pollTable").remove();
-			loadAllPoll();
-			}
-			
-			
-			//location.reload();
-			// $("#column-right").load("./View/poll.php");
-			// loadAllPoll();
-		}
-	});	
+	$status = confirm("you want to delete");
+	if($status == true){
+    	$.ajax({
+    		url : './index.php?controller=mainController&method=delPoll',
+    		type : 'post',
+    		data : "QuestionId="+$id,
+    		success : function(data) {			
+    			$("#hiddenElemtnt").html("");
+    			$("#pollTable").remove();
+    			loadAllPoll();		
+    			//location.reload();
+    			// $("#column-right").load("./View/poll.php");
+    			// loadAllPoll();
+    		}
+    	});
+	}
 }
 
 function AddQuestion() {
