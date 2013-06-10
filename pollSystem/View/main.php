@@ -225,6 +225,7 @@ function loadAllPoll()
     	}    	
         $("#column-right").append($paging[0]);
     });
+    $("#pagingLinks").html("");
      for($i = 0 ; $i < $paging.length ; $i++){
          $("#pagingLinks").append("<input type = \"button\" value = \""+($i+1)+"\" onClick = \"pagination('"+($i)+"')\" />");
      }
