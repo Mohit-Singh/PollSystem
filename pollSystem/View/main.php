@@ -133,7 +133,7 @@ $.fancybox.close();
 });
 
 function loadAllPoll()
-{	
+{	$.ajaxSetup({async: false});
     $.post('index.php',{"controller":"mainController","method":"loadAllPoll"},function(data){    
     
     	var result = jQuery.parseJSON(data);
