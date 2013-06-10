@@ -19,9 +19,15 @@ class commentModel extends DBConnection {
 		$data['tables']		= 'comment';
 		$data['conditions']		= array('question_id' => $qid,'status'=>'TRUE');
 		$result = $this->_db->select($data);
+		
+		$_userid=0;
+		if(isset($_SESSION['userId'])) {
 		$_userid=$_SESSION['userId'];
+		}
+		
 		while($row = $result->fetch(PDO::FETCH_ASSOC)) {
 			//print_r($row);die;
+			//echo $row['id'];
 			$loginId=$row['login_id'];
 			$data['columns']	= array('first_name');
 			$data['tables']		= 'login';
@@ -40,7 +46,8 @@ class commentModel extends DBConnection {
 			
 			//print_r($row);
 		}	
-		echo json_encode($ar);
+		return $ar;
+		
 	}
 	
 	public function removeComments($cid) {

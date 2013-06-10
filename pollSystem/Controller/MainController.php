@@ -173,7 +173,8 @@ class MainController extends Acontroller{
 	public function getComment() {
 		
 		$ob=$this->loadModel("commentModel");
-		$ob->getComments($_REQUEST['questionId']);
+		$ar=$ob->getComments($_REQUEST['questionId']);
+		echo json_encode($ar);
 
 	}
 	

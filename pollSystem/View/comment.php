@@ -73,7 +73,7 @@ function showComments(){
 	$.ajax({
 		type: "POST",
 	    url: './index.php?controller=MainController&method=getComment&questionId=<?php echo $data[0]['qId']?>',  
-	     
+	     async: 'false',
 	       success: function(data){
 				
 		       data=jQuery.parseJSON(data);
@@ -81,7 +81,7 @@ function showComments(){
 				if(i==0) {
 				  $('#comments').prepend("<ul id='example4' class='accordion'>"); }
 				  if(value['delete']=="true") {
-				  $('#example4').prepend("<li id="+i+"><h3>posted by  "+value['login_id']+" on "+value['date_time']+"<input type=\"button\" name=\"deleteLink\" id="+i+" onclick=\"f("+value['id']+")\" value=\"delete\"></a></img></h3><div class=\"panel\">"+value['comment']+"</div></li>");
+				  $('#example4').prepend("<li id="+i+"><h3>posted by  "+value['login_id']+" on "+value['date_time']+"<?php if(isset($_SESSION['userId'])) {?><input type=\"button\" name=\"deleteLink\" id="+i+" onclick=\"f("+value['id']+")\" value=\"delete\"><?php }?></a></img></h3><div class=\"panel\">"+value['comment']+"</div></li>");
 				  }
 				  else {
 				  $('#example4').prepend("<li id="+i+"><h3>posted by  "+value['login_id']+" on "+value['date_time']+"</h3><div class=\"panel\">"+value['comment']+"</div></li>");
