@@ -436,7 +436,7 @@ if(!isset($_SESSION["username"]))
       <div class="left">
        <h2>Welcome To The Polling System</h2>
        <hr />
-       <h3>List Of all Polls</h3><hr />
+       <h3>List Of all Polls</h3>
 <div id="wrapper">
 
 <div id = "column-left" class="column-left">

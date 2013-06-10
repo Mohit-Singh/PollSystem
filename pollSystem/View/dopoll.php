@@ -8,16 +8,18 @@
        <script src="./assets/js/RGraph.radar.js" ></script>
     <link rel="stylesheet" href="./assets/css/demos.css" type="text/css" media="screen" />
 <div id="questionDiv">
-<h2>Poll</h2>
+
+<h2>Pollings</h2>
 <div id="linkGraph">
+<label style="color:#254117;"><b>VIEW MORE GRAPHS :</b></label>
 <a href="#graph1" id = "graph1Click">Graph 1</a>
 <a href="#graph2" id = "graph2Click">Graph 2</a>
 <a href="#questionComments" id = "questionCommentsClick">Comments</a>
 </div>
-<table id = "tableDiv" style = "margin : auto; padding-bottom : 10px;float:left;">
+<table id = "tableDiv" style = "margin : 20px; padding-bottom : 10px;float:left;word-wrap:break-word;">
 <tr>
-	<td>Question: <?php  echo $data[0]['question'];?></td>
-</tr>
+	<td style="font-size: 1.3em; color:#254117;">Question: <?php  echo $data[0]['question'];?></td>
+</tr><hr>
 <?php $count=1; foreach ($data as $key =>$val){?>
 	<tr><td>
 	<?php 
