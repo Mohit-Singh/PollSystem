@@ -208,7 +208,7 @@ h1 small {
 }
 .body a {
 	color: #3C6E10;/*#97c950;*/
-	text-decoration:underline;
+	text-decoration:none;
 }
 .left {
 /* 	float:left; */

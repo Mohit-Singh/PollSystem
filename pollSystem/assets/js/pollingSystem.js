@@ -1,7 +1,7 @@
 $paging = "";
 
 function loadAllPoll() {
-	$perPagePoll = 2;
+	$perPagePoll = 20;
 	str = "";
 	$flag = 0;
 
@@ -113,20 +113,44 @@ function loadAllPoll() {
 							if ($flag) {
 								break;
 							}
-						}
+						}						
 						$("#column-right").append($paging[0]);
 					});
+	createPageLinks();
+}
+
+function createPageLinks($current = 0, $maxLinks = 4){
 	$("#pagingLinks").html("");
-	for ($i = 0; $i < $paging.length; $i++) {
+	if($current > 0){
+		$temp = $current - $maxLinks;
+		if($temp < 0){
+			$temp = 0;
+		}
+		$("#pagingLinks").append("<input type = \"button\"" +
+				"value = \"previous\"" +				
+				"onClick = createPageLinks("+$temp+")" +
+				" />...");
+	}
+	//$paging.length
+	for ($i = $current; $i < ($current+$maxLinks); $i++) {
+		if($i < $paging.length){
 		$("#pagingLinks").append(
 				"<input type = \"button\" value = \"" + ($i + 1)
 						+ "\" onClick = \"pagination('" + ($i) + "')\" />");
+		}
 	}
+	
+	if($i < $paging.length){
+		$("#pagingLinks").append("...<input type = \"button\" value = \"next\"" +
+				"onClick = createPageLinks("+$i+") />");
+	}
+	
 }
+
 
 function pagination($page) {
 	// alert($paging[$page]);
-	$("#column-right").html($paging[$page]);
+	$("#tableDiv").html($paging[$page]);
 }
 
 function voteNow(id) {
