@@ -111,7 +111,7 @@
     					&& data.trim() != "Password does not match") {
     				$("#divRight").hide();
     				$('#logOut').show();
-    				$("#column-right").html("");
+    				//$("#column-right").html("");
     				$("#createPoll").html(data);
     				$username = $("#userName").val();
     				$login = "yes";
@@ -179,8 +179,12 @@
 #pagingLinks{
 	margin: 0 auto;
 	padding: 0;
-	width: 38%;
+	width: 52%;
 	text-align: center;
+}
+#tableDiv td{
+    word-break: break-all;
+    word-wrap: break-word;
 }
 </style>
 </head>

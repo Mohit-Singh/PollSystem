@@ -1,4 +1,3 @@
-
 <head>
 <link rel="stylesheet" href="./View/css/reset.css" type="text/css" charset="utf-8">
 <link rel="stylesheet" href="./View/css/core.css" type="text/css" charset="utf-8">
@@ -129,7 +128,7 @@ $.ajax({
 	     
 	  });
 	  showComments();
-$("#column-right").html("");
+//$("#column-right").html("");
 loadAllPoll();
 }
 
@@ -160,7 +159,7 @@ $.ajax({
 	     }
 	  });
 showComments();
-$("#column-right").html("");
+//$("#column-right").html("");
 loadAllPoll();
 } 
 </script>

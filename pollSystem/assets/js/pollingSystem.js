@@ -1,7 +1,9 @@
 $paging = "";
-
+$pagingLinks = "";
+$currentPage = 0;
+$currentLinkPage = 0;
 function loadAllPoll() {
-	$perPagePoll = 20;
+	$perPagePoll = 4;
 	str = "";
 	$flag = 0;
 
@@ -33,7 +35,7 @@ function loadAllPoll() {
 
 						for ($i = 0; $i < $paging.length; $i++) {
 
-							$paging[$i] = "<div id='tableDiv'>"
+							$paging[$i] = "<div id='tableDisplayDiv'>"
 									+ "<table id='pollTable'>"
 									+ "<tr id='tableHead'><td>Question</td>"
 									+ "<td>User Email Id</td>"
@@ -113,44 +115,129 @@ function loadAllPoll() {
 							if ($flag) {
 								break;
 							}
+						}
+						if($currentPage > 0){
+							//$("#tableDisplayDiv").append($paging[$currentPage]);
+							//alert($currentLinkPage);
+							createPageLinks();
+							loadPageLinks($currentLinkPage,$currentPage);
+						}
+						else{
+							//alert($.find("#tableDisplayDiv"));
+							$("#column-right").append($paging[0]);
+							createPageLinks();
+//							loadPageLinks($currentLinkPage,$currentPage);
 						}						
-						$("#column-right").append($paging[0]);
-					});
-	createPageLinks();
+					});	
 }
 
-function createPageLinks($current = 0, $maxLinks = 4){
+function loadPageLinks($linkPageNumber,$toPage){
 	$("#pagingLinks").html("");
-	if($current > 0){
-		$temp = $current - $maxLinks;
-		if($temp < 0){
-			$temp = 0;
-		}
-		$("#pagingLinks").append("<input type = \"button\"" +
-				"value = \"previous\"" +				
-				"onClick = createPageLinks("+$temp+")" +
-				" />...");
+	$("#pagingLinks").append($pagingLinks[$linkPageNumber]);
+	$currentPage = $toPage;
+	if($.find("#tableDisplayDiv") != null){
+//		alert("jam");
+		$("#tableDisplayDiv").html($paging[$toPage]);
 	}
-	//$paging.length
-	for ($i = $current; $i < ($current+$maxLinks); $i++) {
-		if($i < $paging.length){
-		$("#pagingLinks").append(
-				"<input type = \"button\" value = \"" + ($i + 1)
-						+ "\" onClick = \"pagination('" + ($i) + "')\" />");
-		}
-	}
+	else{
+//		alert("iam");
+		$("#column-right").append($paging[$toPage]);
+	}	
+}
+
+function createPageLinks($current = 0, $maxLinks = 5){
+	$("#pagingLinks").html("");
 	
-	if($i < $paging.length){
-		$("#pagingLinks").append("...<input type = \"button\" value = \"next\"" +
-				"onClick = createPageLinks("+$i+") />");
+	$dataLength = $paging.length;
+	
+	if (($dataLength % $maxLinks) == 0) {
+		$pagingLinks = new Array(Math.floor($dataLength
+				/ $maxLinks));
+	} else {
+		$pagingLinks = new Array(Math.floor($dataLength
+				/ $maxLinks) + 1);
 	}
+		
+//	$pagingLinks = new Array($paging.length);
+	$temp = 1;
+	$i = 0;
+	$pageCounter = 0;
+	//alert($paging.length);	
+	
+	for($j = 0; $j < $pagingLinks.length ; $j++){
+	
+//		if($current > 0){
+//			$temp = $current - $maxLinks;
+//			if($temp < 0){
+//				$temp = 0;
+//			}
+//			$("#pagingLinks").append("<input type = \"button\"" +
+//					"value = \"previous\"" +				
+//					"onClick = createPageLinks("+$temp+")" +
+//					" />...");
+//		}
+		if($j  > 0){
+			$pagingLinks[$j] = "<input type = \"button\"" +
+			"value = \"previous\"" +				
+			"onClick = loadPageLinks("+($j-1)+","+($pageCounter-$maxLinks)+")" +
+			" />..."; 
+		}
+		for ($i = $pageCounter; $i < ($pageCounter+$maxLinks); $i++) {
+			if($i < $paging.length){
+				if($pagingLinks[$j] == null){
+					$pagingLinks[$j] = "";
+//					alert($pagingLinks[$j]);
+				}
+				$pagingLinks[$j] += "<input type = \"button\" value = \"" + ($i + 1)
+							+ "\" onClick = \"pagination(" + ($i) + ","+$j+")\" />";
+			}
+		}
+		$pageCounter = ($pageCounter+$maxLinks);
+		if($pageCounter > $paging.length){
+			$pageCounter = $paging.length;
+		}
+		if($j < ($pagingLinks.length-1)){
+			$pagingLinks[$j] += "...<input type = \"button\" value = \"next\"" +
+					"onClick = loadPageLinks("+($j+1)+","+$pageCounter+") />";
+		}
+	}
+	$("#pagingLinks").append($pagingLinks[0]);
+	
+	
+//	if($current > 0){
+//		$temp = $current - $maxLinks;
+//		if($temp < 0){
+//			$temp = 0;
+//		}
+//		$("#pagingLinks").append("<input type = \"button\"" +
+//				"value = \"previous\"" +				
+//				"onClick = createPageLinks("+$temp+")" +
+//				" />...");
+//	}
+//	//$paging.length
+//	$currentPage = $current;
+//	$("#tableDisplayDiv").html($paging[$current]);
+//	for ($i = $current; $i < ($current+$maxLinks); $i++) {
+//		if($i < $paging.length){
+//		$("#pagingLinks").append(
+//				"<input type = \"button\" value = \"" + ($i + 1)
+//						+ "\" onClick = \"pagination(" + ($i) + ")\" />");
+//		}
+//	}
+//	
+//	if($i < $paging.length){
+//		$("#pagingLinks").append("...<input type = \"button\" value = \"next\"" +
+//				"onClick = createPageLinks("+$i+") />");
+//	}
 	
 }
 
 
-function pagination($page) {
+function pagination($page,$linkPagePosition) {
 	// alert($paging[$page]);
-	$("#tableDiv").html($paging[$page]);
+	$currentPage = $page;
+	$currentLinkPage = $linkPagePosition;
+	$("#tableDisplayDiv").html($paging[$page]);
 }
 
 function voteNow(id) {
@@ -242,7 +329,7 @@ function DeletePoll($id) {
 			data : "QuestionId=" + $id,
 			success : function(data) {
 				$("#hiddenElemtnt").html("");
-				$("#pollTable").remove();
+				//$("#pollTable").remove();
 				loadAllPoll();
 				// location.reload();
 				// $("#column-right").load("./View/poll.php");
