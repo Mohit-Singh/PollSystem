@@ -195,13 +195,17 @@ class User extends DBConnection {
 		);
 		$data['group'] = array('question.id');
 		$data['conditions'] = array(array('question.status = "TRUE"'),true);	
+		//$data['limit']		= 200;
+		//$data['offset']		= 200;
+
 		$result = $this->_db->select($data);
 		
-		$myResult=array();
-		while ($row = $result->fetch(PDO::FETCH_ASSOC))
-		{
-			$myResult[]=$row;
-		}
+		//$myResult=array();
+		$myResult = $result->fetchAll(PDO::FETCH_ASSOC);
+// 		while ($row = $result->fetch(PDO::FETCH_ASSOC))
+// 		{
+// 			$myResult[]=$row;
+// 		}
 		return  $myResult;		
 	}
 }

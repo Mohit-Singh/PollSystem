@@ -3,7 +3,7 @@ $pagingLinks = "";
 $currentPage = 0;
 $currentLinkPage = 0;
 function loadAllPoll() {
-	$perPagePoll = 4;
+	$perPagePoll = 10;
 	str = "";
 	$flag = 0;
 
@@ -124,7 +124,13 @@ function loadAllPoll() {
 						}
 						else{
 							//alert($.find("#tableDisplayDiv"));
-							$("#column-right").append($paging[0]);
+							if($.find("#tableDisplayDiv") != ""){
+								//alert("asfsadfsd");
+								$("#tableDisplayDiv").html($paging[0]);								
+							}
+							else{
+								$("#column-right").append($paging[0]);
+							}							
 							createPageLinks();
 //							loadPageLinks($currentLinkPage,$currentPage);
 						}						
@@ -145,7 +151,8 @@ function loadPageLinks($linkPageNumber,$toPage){
 	}	
 }
 
-function createPageLinks($current = 0, $maxLinks = 5){
+function createPageLinks(){
+	$maxLinks = 5
 	$("#pagingLinks").html("");
 	
 	$dataLength = $paging.length;
