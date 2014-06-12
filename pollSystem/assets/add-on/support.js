@@ -54,8 +54,7 @@ function manageToolbar(obj) {
 
 
 function performTask(obj,index){
-	imgSrc = $("img_index_"+index).find('img').attr('src');
-	alert(imgSrc);
+	imgSrc = $("#img_index_"+index).find('img').attr('src');
 	initImageConvert(imgSrc);
 }
 
