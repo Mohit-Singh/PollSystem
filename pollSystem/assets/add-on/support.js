@@ -1,7 +1,7 @@
-self.port.on("initFunction", function() {
+/*self.port.on("initFunction", function() {
   caller();
 });
-
+*/
 function caller(){
 	$('img')
 	.each(
